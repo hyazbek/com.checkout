@@ -1,9 +1,11 @@
-﻿using com.checkout.application;
+﻿using com.checkout.application.Helpers;
+using com.checkout.application.Interfaces;
 using com.checkout.data;
 using com.checkout.data.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using com.checkout.application.Helpers;
 
 namespace com.checkout.api.Controllers
 {
@@ -15,6 +17,8 @@ namespace com.checkout.api.Controllers
         private readonly CKODBContext _context;
         private ICardService _cardService;
         private IMerchantService _merchantService;
+        private ICurrencyService _currencyService;
+        private ITransactionService _transactionService;
 
         public PaymentController(CKODBContext context)
         {
@@ -34,36 +38,66 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpPost]
-        [Route("AddCard")]
+        [Route("ProcessTransaction")]
         public async Task<IActionResult> ProcessTransaction(PaymentRequest paymentRequest)
         {
             if(paymentRequest == null)
             {
-                return BadRequest("Null Reference: Payment Request");
+                return BadRequest("Invalid Payment Request");
             }
-            if(paymentRequest.Merchant == null)
-            {
-                return BadRequest("Invalid Merchant");
-            }
-            if(paymentRequest.Currency == null)
-            {
-                return BadRequest("Invalid Currency");
-            }
-            if(paymentRequest.Amount <= 0)
+            if (paymentRequest.Amount <= 0)
             {
                 return BadRequest("Invalid Amount");
             }
+
+            bool isValid = Guid.TryParse(paymentRequest.MerchantID, out Guid merchantID);
+            if (!isValid)
+            {
+                return BadRequest("Invalid Merchant");
+            }
+
+            var currency = new Currency();
+            currency = _currencyService.GetCurrencyByCode(paymentRequest.CurrencyCode);
+            if(currency == null)
+            {
+                return BadRequest("Invalid Currency");
+            }
+
             var merchant = new Merchant();
-            merchant = _merchantService.GetMerchant(paymentRequest.MerchantID);
+            merchant = _merchantService.GetMerchant(merchantID);
+            if(merchant == null)
+            {
+                return BadRequest("Invalid Merchant");
+            }
 
             var card = new CardDetails();
-            card = _cardService.GetCardDetailsByNumber(paymentRequest.Card);
+            card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
+            if (card == null)
+            {
+                card = new CardDetails
+                {
+                    CardNumber = paymentRequest.Card.CardNumber,
+                    Cvv = paymentRequest.Card.Cvv,
+                    HolderName = paymentRequest.Card.HolderName,
+                    ExpiryMonth = paymentRequest.Card.ExpiryMonth,
+                    ExpiryYear = paymentRequest.Card.ExpiryYear,
+                };
+                _cardService.AddCard(card);
+            }
+
             var transaction = new Transaction
             {
+                TransactionID = Guid.NewGuid(),
+                Status = TransactionStatus.Created.ToString(),
                 Merchant = merchant,
-                CardDetails = 
+                CardDetails = card,
+                Amount = paymentRequest.Amount,
+                Currency = currency
+            };
 
-            }
+            _transactionService.CreateTransaction(transaction);
+
+            return Ok(transaction);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using com.checkout.data.Model;
 
-namespace com.checkout.application
+namespace com.checkout.application.Interfaces
 {
     public interface ICardService
     {

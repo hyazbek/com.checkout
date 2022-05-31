@@ -2,7 +2,7 @@
 {
     public class Transaction
     {
-        public int PaymentRequestID { get; set; }
+        public Guid TransactionID { get; set; }
         public Merchant Merchant { get; set; }
         public CardDetails CardDetails { get; set; }
         public decimal Amount { get; set; }
