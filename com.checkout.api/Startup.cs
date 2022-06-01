@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
-
+using Newtonsoft.Json;
 
 namespace com.checkout.api
     {
@@ -40,7 +40,8 @@ namespace com.checkout.api
         {
 
             services.AddDbContext<CKODBContext>(options => options.UseInMemoryDatabase("CKODB"));
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
+                .ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
             services.AddScoped<EFRepository>();
             //services.AddScoped<RepositoryService>();
             services.AddScoped<ICurrencyService, CurrencyService>();

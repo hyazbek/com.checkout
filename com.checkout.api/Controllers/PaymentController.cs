@@ -44,10 +44,22 @@ namespace com.checkout.api.Controllers
         [Route("GetAllMerchants")]
         public async Task<IActionResult> GetAllMerchants()
         {
-            var cards = await _context.Merchants
+            var merchants = await _context.Merchants
                 .Select(itm => itm)
                 .ToArrayAsync();
-            var response = cards.Select(itm => itm);
+            var response = merchants.Select(itm => itm);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("GetAllTransactions")]
+        public async Task<IActionResult> GetAllTransactions()
+        {
+            var transactions = await _context.Transactions
+                .Select(itm => itm)
+                .ToArrayAsync();
+            var response = transactions.Select(itm => itm);
 
             return Ok(response);
         }
@@ -102,6 +114,7 @@ namespace com.checkout.api.Controllers
 
             var transaction = new Transaction
             {
+                TransactionID = Guid.NewGuid(),
                 Status = TransactionStatus.Created.ToString(),
                 Merchant = merchant,
                 CardDetails = card,

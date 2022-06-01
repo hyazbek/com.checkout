@@ -21,7 +21,7 @@ namespace com.checkout.application.services
             _contextService.Add(entity);
         }
 
-        public Transaction GetTransactionById(int transactionID)
+        public Transaction GetTransactionById(Guid transactionID)
         {
             return _contextService.Transactions.ToList().Find(itm => itm.TransactionID == transactionID);
         }

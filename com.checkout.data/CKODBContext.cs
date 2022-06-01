@@ -79,6 +79,27 @@ namespace com.checkout.data
             context.Merchants.Add(merchant3);
             context.SaveChanges();
             #endregion
+
+            #region Currency Data
+
+            var currency1 = new Currency
+            {
+                Id = 1,
+                CurrencyCode="USD",
+                CurrencyName="US Dollar"
+            };
+            context.Currencies.Add(currency1);
+
+            var currency2 = new Currency
+            {
+                Id = 2,
+                CurrencyCode = "GBP",
+                CurrencyName = "British Pound"
+            };
+            context.Currencies.Add(currency2);
+
+            context.SaveChanges();
+            #endregion
         }
     }
 }
