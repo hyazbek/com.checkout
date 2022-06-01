@@ -23,17 +23,17 @@ namespace com.checkout.api.Controllers
         public PaymentController(CKODBContext context, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService)
         {
             _context = context;
-            //_cardService = cardService;
-            //_currencyService = currencyService;
-            //_merchantService = merchantService;
-            //_transactionService = transactionService;
+            _cardService = cardService;
+            _currencyService = currencyService;
+            _merchantService = merchantService;
+            _transactionService = transactionService;
         }
 
         [HttpGet]
-        [Route("GetAllCardsV2")]
+        [Route("GetAllCurrencies")]
         public async Task<ActionResult<List<CardDetails>>> Get()
         {
-            return Ok(await _context.Cards.ToListAsync());
+            return Ok(await _context.Currencies.ToListAsync());
         }
 
         [HttpGet]
