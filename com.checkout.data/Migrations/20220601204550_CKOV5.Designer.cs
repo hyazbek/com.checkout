@@ -12,8 +12,8 @@ using com.checkout.data;
 namespace com.checkout.data.Migrations
 {
     [DbContext(typeof(CKODBContext))]
-    [Migration("20220601130006_CreateInitialCKODB")]
-    partial class CreateInitialCKODB
+    [Migration("20220601204550_CKOV5")]
+    partial class CKOV5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,19 +119,19 @@ namespace com.checkout.data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44ff71d8-e8bf-4706-92ca-ff0f1a57095c"),
+                            Id = new Guid("4fa68f3b-d4e7-4245-8786-31e8a66566fa"),
                             Country = "USA",
                             Name = "Github"
                         },
                         new
                         {
-                            Id = new Guid("7cdde890-1073-45b5-9e7f-9edc65aabb42"),
+                            Id = new Guid("88703fb9-aa3b-4718-8a73-21a4eb5e7f6c"),
                             Country = "USA",
                             Name = "Amazon"
                         },
                         new
                         {
-                            Id = new Guid("eb521413-ca87-4b9b-98b7-f741698ca33b"),
+                            Id = new Guid("20f96956-e5df-4bf8-ac24-65c9f76fbe16"),
                             Country = "UK",
                             Name = "Farfetch"
                         });
@@ -155,9 +155,8 @@ namespace com.checkout.data.Migrations
                     b.Property<int>("CardDetailsID")
                         .HasColumnType("int");
 
-                    b.Property<string>("CurrencyCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CurrencyID")
+                        .HasColumnType("int");
 
                     b.Property<string>("MerchantID")
                         .IsRequired()
@@ -182,10 +181,10 @@ namespace com.checkout.data.Migrations
                     b.Property<int>("CardDetailsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CurrencyId")
+                    b.Property<int>("CurrencyID")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("MerchantId")
+                    b.Property<Guid>("MerchantID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")
@@ -200,9 +199,9 @@ namespace com.checkout.data.Migrations
 
                     b.HasIndex("CardDetailsID");
 
-                    b.HasIndex("CurrencyId");
+                    b.HasIndex("CurrencyID");
 
-                    b.HasIndex("MerchantId");
+                    b.HasIndex("MerchantID");
 
                     b.ToTable("Transactions", (string)null);
                 });
@@ -228,13 +227,13 @@ namespace com.checkout.data.Migrations
 
                     b.HasOne("com.checkout.data.Model.Currency", "Currency")
                         .WithMany()
-                        .HasForeignKey("CurrencyId")
+                        .HasForeignKey("CurrencyID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("com.checkout.data.Model.Merchant", "Merchant")
                         .WithMany()
-                        .HasForeignKey("MerchantId")
+                        .HasForeignKey("MerchantID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

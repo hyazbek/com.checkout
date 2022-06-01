@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace com.checkout.data.Migrations
 {
-    public partial class CreateInitialCKODB : Migration
+    public partial class CKOV5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace com.checkout.data.Migrations
                 {
                     PaymentRequestID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrencyCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrencyID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     CardDetailsID = table.Column<int>(type: "int", nullable: false),
                     MerchantID = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -81,10 +81,10 @@ namespace com.checkout.data.Migrations
                 columns: table => new
                 {
                     TransactionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MerchantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MerchantID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CardDetailsID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    CurrencyId = table.Column<int>(type: "int", nullable: false),
+                    CurrencyID = table.Column<int>(type: "int", nullable: false),
                     StatusCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -98,14 +98,14 @@ namespace com.checkout.data.Migrations
                         principalColumn: "CardDetailsID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transactions_Currencies_CurrencyId",
-                        column: x => x.CurrencyId,
+                        name: "FK_Transactions_Currencies_CurrencyID",
+                        column: x => x.CurrencyID,
                         principalTable: "Currencies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transactions_Merchants_MerchantId",
-                        column: x => x.MerchantId,
+                        name: "FK_Transactions_Merchants_MerchantID",
+                        column: x => x.MerchantID,
                         principalTable: "Merchants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -126,9 +126,9 @@ namespace com.checkout.data.Migrations
                 columns: new[] { "Id", "Country", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("44ff71d8-e8bf-4706-92ca-ff0f1a57095c"), "USA", "Github" },
-                    { new Guid("7cdde890-1073-45b5-9e7f-9edc65aabb42"), "USA", "Amazon" },
-                    { new Guid("eb521413-ca87-4b9b-98b7-f741698ca33b"), "UK", "Farfetch" }
+                    { new Guid("20f96956-e5df-4bf8-ac24-65c9f76fbe16"), "UK", "Farfetch" },
+                    { new Guid("4fa68f3b-d4e7-4245-8786-31e8a66566fa"), "USA", "Github" },
+                    { new Guid("88703fb9-aa3b-4718-8a73-21a4eb5e7f6c"), "USA", "Amazon" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -142,14 +142,14 @@ namespace com.checkout.data.Migrations
                 column: "CardDetailsID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_CurrencyId",
+                name: "IX_Transactions_CurrencyID",
                 table: "Transactions",
-                column: "CurrencyId");
+                column: "CurrencyID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_MerchantId",
+                name: "IX_Transactions_MerchantID",
                 table: "Transactions",
-                column: "MerchantId");
+                column: "MerchantID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

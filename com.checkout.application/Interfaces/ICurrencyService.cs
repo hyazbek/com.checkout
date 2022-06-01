@@ -6,6 +6,6 @@ namespace com.checkout.application.Interfaces
 {
     public interface ICurrencyService
     {
-        Currency GetCurrencyByCode(string currency);
+        Currency GetCurrencyByID(int currency);
     }
 }

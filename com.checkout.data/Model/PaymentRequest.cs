@@ -7,7 +7,7 @@ namespace com.checkout.data.Model
     public class PaymentRequest
     {
         public int PaymentRequestID { get; set; }
-        public string CurrencyCode { get; set; }
+        public int CurrencyID { get; set; }
 
         [Column(TypeName = "decimal(18,4)")]
         public decimal Amount { get; set; }

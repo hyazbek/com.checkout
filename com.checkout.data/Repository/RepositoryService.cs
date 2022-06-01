@@ -1,4 +1,5 @@
 ﻿using com.checkout.data.Model;
+using System.Linq.Expressions;
 
 namespace com.checkout.data.Repository
 {
@@ -15,7 +16,6 @@ namespace com.checkout.data.Repository
         {
             return repository.GetAll<TEntity>();
         }
-
         public TEntity Add<TEntity>(TEntity item) where TEntity : class
         {
             repository.Add(item);
@@ -24,6 +24,12 @@ namespace com.checkout.data.Repository
             
             return item;
         }
+        public IQueryable<TEntity> Find<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
+        {
+            return repository
+                .Find(predicate);
+        }
+
         public int SaveChanges()
         {
             return repository._context.SaveChanges();

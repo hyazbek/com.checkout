@@ -9,16 +9,16 @@ namespace com.checkout.application.services
 {
     public class CardService : ICardService
     {
-        private readonly RepositoryService _contextService;
+        private readonly EFRepository _contextService;
 
-        public CardService(RepositoryService contextService)
+        public CardService(EFRepository contextService)
         {
             _contextService = contextService;
         }
 
         public void AddCard(CardDetails card)
         {
-            _contextService.Add(card);
+            _contextService.Add<CardDetails>(card);
         }
 
         public List<CardDetails> GetAllCards()

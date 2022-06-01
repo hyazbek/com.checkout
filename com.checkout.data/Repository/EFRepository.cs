@@ -29,6 +29,10 @@ namespace com.checkout.data.Repository
         {
             return _context.Set<TEntity>();
         }
+        public IQueryable<TEntity> Find<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
+        {
+            return _context.Set<TEntity>().Where(predicate);
+        }
 
         // add generic update method here
 
@@ -39,7 +43,6 @@ namespace com.checkout.data.Repository
 
             return status == 1 ? true : false;
         }
-
 
 
         public void SaveChanges() => _context.SaveChanges();

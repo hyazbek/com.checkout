@@ -1,4 +1,5 @@
-﻿using com.checkout.application.Helpers;
+﻿using com.checkout.api.Helpers;
+using com.checkout.application.Helpers;
 using com.checkout.application.Interfaces;
 using com.checkout.data;
 using com.checkout.data.Model;
@@ -59,9 +60,37 @@ namespace com.checkout.api.Controllers
         public async Task<IActionResult> GetAllTransactions()
         {
             var transactions = await _context.Transactions
-                .Select(itm => itm)
+                .Include(itm => itm.Merchant)
+                .Include(itm => itm.CardDetails)
+                .Include(itm => itm.Currency)
                 .ToArrayAsync();
-            var response = transactions.Select(itm => itm);
+            
+
+            return Ok(transactions);
+        }
+
+        [HttpGet]
+        [Route("GetTransactionByID")]
+        public async Task<IActionResult> GetTransactionByID(Guid transactionId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = new TransactionResponse();
+
+            var entity = _transactionService.GetTransactionById(transactionId);
+
+            var currency = _currencyService.GetCurrencyByID(entity.CurrencyID);
+            response.Currency = currency.CurrencyCode;
+
+            response.Amount = entity.Amount;
+            //response.BankReferenceID = entity.BankReferenceID;
+            response.Status = entity.Status;
+
+            var card = _cardService.GetCardDetailsByID(entity.CardDetailsID);
+
+            card.CardNumber = CardHelper.MaskCarNumber(card.CardNumber);
+            response.Card = card;
 
             return Ok(response);
         }
@@ -93,7 +122,7 @@ namespace com.checkout.api.Controllers
             }
 
             var currency = new Currency();
-            currency = _currencyService.GetCurrencyByCode(paymentRequest.CurrencyCode);
+            currency = _currencyService.GetCurrencyByID(paymentRequest.CurrencyID);
             if(currency == null)
             {
                 return BadRequest("Invalid Currency");
@@ -121,9 +150,10 @@ namespace com.checkout.api.Controllers
                 Merchant = merchant,
                 CardDetails = card,
                 Amount = paymentRequest.Amount,
-                Currency = currency
+                Currency = currency,
+                StatusCode = TransactionStatus.Created.ToString(),
+                
             };
-
             _transactionService.CreateTransaction(transaction);
 
             return Ok(transaction);

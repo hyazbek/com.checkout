@@ -15,9 +15,9 @@ namespace com.checkout.application.services
             _contextService = contextService;
         }
 
-        public Currency GetCurrencyByCode(string currencyCode)
+        public Currency GetCurrencyByID(int currencyId)
         {
-            return _contextService.Currencies.ToList().Find(itm => itm.CurrencyCode == currencyCode);
+            return _contextService.Currencies.ToList().Find(itm => itm.Id == currencyId);
         }
     }
 }
