@@ -1,20 +1,16 @@
-﻿
-using com.checkout.data.Repository;
-
-namespace Checkout.Data.Services
+﻿namespace com.checkout.data.Repository
 {
     public class RepositoryService
     {
-        //private readonly EFRepository repository;
+        private readonly EFRepository repository;
 
-        //public RepositoryService(EFRepository repository)
-        //{
-        //    this.repository = repository;
-        //}
+        public RepositoryService(EFRepository repository)
+        {
+            this.repository = repository;
+        }
 
-        //public void Add<EntityType>(EntityType entity) => repository..Add(entity);
-        //public void Remove<EntityType>(EntityType entity) => repository.Remove(entity);
-        //public void Find<EntityType>(EntityType entity) => repository.Find
-        //public void SaveChanges() => repository.SaveChanges();
+        public void Add<EntityType>(EntityType entity) => repository.Add(entity);
+        public void Remove<EntityType>(EntityType entity) => repository.Remove(entity);
+        
     }
 }

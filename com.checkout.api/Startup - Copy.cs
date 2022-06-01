@@ -14,10 +14,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using Newtonsoft.Json;
 
 namespace com.checkout.api
-{
-    public class Startup_old
     {
-
+    public class Startup
+    {
         #region Properties
 
         private IConfiguration _configuration { get; }
@@ -26,7 +25,7 @@ namespace com.checkout.api
 
         #region Constuctor
 
-        public Startup_old(IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -39,12 +38,19 @@ namespace com.checkout.api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
+                .ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
             services.AddSystemServices();
 
-            //TODO Change this to use Azure Key Store. Temporary, must be changed
             services.AddDbContext<CKODBContext>(options =>
              options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Learning API", Version = "v1" });
+            });
+
+
         }
 
         /// <summary>
@@ -52,29 +58,23 @@ namespace com.checkout.api
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Learning API v1"));
             }
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Checkout API V1");
-                c.RoutePrefix = string.Empty;
-            });
+            var context = serviceProvider.GetService<CKODBContext>();
+            //context.Database.EnsureDeleted();
+            //context.LoadTestData(context);
 
             app.UseHttpsRedirection();
+
             app.UseRouting();
+
             app.UseAuthorization();
-
-
 
             app.UseEndpoints(endpoints =>
             {
@@ -82,6 +82,6 @@ namespace com.checkout.api
             });
         }
 
-
+        
     }
 }

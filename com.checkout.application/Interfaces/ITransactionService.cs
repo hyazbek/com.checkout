@@ -9,6 +9,7 @@ namespace com.checkout.application.Interfaces
         void CreateTransaction(Transaction entity);
         Transaction GetTransactionById(Guid transactionID);
         List<Transaction> GetTransactionsByMerchantID(int merchantID);
+        List<Transaction> GetAllTransactions();
         bool UpdateTransaction(Transaction transaction);
     }
 }

@@ -12,6 +12,9 @@ payload process payment
     "expiryMonth": "11",
     "expiryYear": "2035"
   },
-  "merchantID": "123456789",
+  "merchantID": "1",
   "bank": "QNB"
 }
+
+
+172.16.21.109

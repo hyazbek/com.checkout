@@ -10,7 +10,7 @@ namespace com.checkout.data.Repository
 {
     public class EFRepository
     {
-        public CKODBContext _context { get; set; }
+        public readonly CKODBContext _context;
 
         public EFRepository(CKODBContext context)
         {
