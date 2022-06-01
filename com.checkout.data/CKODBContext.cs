@@ -13,6 +13,9 @@ namespace com.checkout.data
         public DbSet<CardDetails> Cards { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Merchant> Merchants { get; set; }
+        public DbSet<PaymentRequest> PaymentRequests { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
 
         public void LoadTestData(CKODBContext context)
         {
@@ -47,7 +50,33 @@ namespace com.checkout.data
                 ExpiryYear = "2024"
             };
             context.Cards.Add(card3);
+            #endregion
 
+            #region Merchant Data
+
+            var merchant1 = new Merchant
+            {
+                Id = 1,
+                Name = "github",
+                Country = "USA"
+            };
+            context.Merchants.Add(merchant1);
+
+            var merchant2 = new Merchant
+            {
+                Id = 2,
+                Name = "Amazon",
+                Country = "USA"
+            };
+            context.Merchants.Add(merchant2);
+
+            var merchant3 = new Merchant
+            {
+                Id = 3,
+                Name = "Checkout",
+                Country = "UK"
+            };
+            context.Merchants.Add(merchant3);
             context.SaveChanges();
             #endregion
         }

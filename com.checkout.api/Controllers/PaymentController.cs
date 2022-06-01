@@ -5,7 +5,7 @@ using com.checkout.data.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using com.checkout.application.Helpers;
+
 
 namespace com.checkout.api.Controllers
 {
@@ -20,9 +20,13 @@ namespace com.checkout.api.Controllers
         private ICurrencyService _currencyService;
         private ITransactionService _transactionService;
 
-        public PaymentController(CKODBContext context)
+        public PaymentController(CKODBContext context, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService)
         {
             _context = context;
+            _cardService = cardService;
+            _currencyService = currencyService;
+            _merchantService = merchantService;
+            _transactionService = transactionService;
         }
 
         [HttpGet]
@@ -30,6 +34,17 @@ namespace com.checkout.api.Controllers
         public async Task<IActionResult> GetAllCards()
         {
             var cards = await _context.Cards
+                .Select(itm => itm)
+                .ToArrayAsync();
+            var response = cards.Select(itm => itm);
+
+            return Ok(response);
+        }
+        [HttpGet]
+        [Route("GetAllMerchants")]
+        public async Task<IActionResult> GetAllMerchants()
+        {
+            var cards = await _context.Merchants
                 .Select(itm => itm)
                 .ToArrayAsync();
             var response = cards.Select(itm => itm);
@@ -50,8 +65,15 @@ namespace com.checkout.api.Controllers
                 return BadRequest("Invalid Amount");
             }
 
-            bool isValid = Guid.TryParse(paymentRequest.MerchantID, out Guid merchantID);
+            bool isValid = int.TryParse(paymentRequest.MerchantID, out int merchantID);
             if (!isValid)
+            {
+                return BadRequest("Invalid Merchant ID");
+            }
+
+            var merchant = new Merchant();
+            merchant = _merchantService.GetMerchant(merchantID);
+            if (merchant == null)
             {
                 return BadRequest("Invalid Merchant");
             }
@@ -61,13 +83,6 @@ namespace com.checkout.api.Controllers
             if(currency == null)
             {
                 return BadRequest("Invalid Currency");
-            }
-
-            var merchant = new Merchant();
-            merchant = _merchantService.GetMerchant(merchantID);
-            if(merchant == null)
-            {
-                return BadRequest("Invalid Merchant");
             }
 
             var card = new CardDetails();
@@ -87,7 +102,6 @@ namespace com.checkout.api.Controllers
 
             var transaction = new Transaction
             {
-                TransactionID = Guid.NewGuid(),
                 Status = TransactionStatus.Created.ToString(),
                 Merchant = merchant,
                 CardDetails = card,

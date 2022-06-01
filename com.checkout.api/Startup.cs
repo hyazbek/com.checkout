@@ -1,5 +1,8 @@
 using System.Threading.Tasks;
+using com.checkout.application.Interfaces;
+using com.checkout.application.services;
 using com.checkout.data;
+using com.checkout.data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +41,14 @@ namespace com.checkout.api
 
             services.AddDbContext<CKODBContext>(options => options.UseInMemoryDatabase("CKODB"));
             services.AddControllers();
-            
+            services.AddScoped<EFRepository>();
+            //services.AddScoped<RepositoryService>();
+            services.AddScoped<ICurrencyService, CurrencyService>();
+            services.AddScoped<ICardService, CardService>();
+            services.AddScoped<IMerchantService, MerchantService>();
+            services.AddScoped<ITransactionService, TransactionService>();
+           
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Learning API", Version = "v1" });
@@ -61,6 +71,7 @@ namespace com.checkout.api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Learning API v1"));
             }
             var context = serviceProvider.GetService<CKODBContext>();
+            context.Database.EnsureDeleted();
             context.LoadTestData(context);
 
             app.UseHttpsRedirection();
