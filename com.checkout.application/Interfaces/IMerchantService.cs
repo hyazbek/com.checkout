@@ -5,6 +5,6 @@ namespace com.checkout.application.Interfaces
 {
     public interface IMerchantService
     {
-        Merchant GetMerchant(int merchantID);
+        Merchant GetMerchant(Guid merchantID);
     }
 }

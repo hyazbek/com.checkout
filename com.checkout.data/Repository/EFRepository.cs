@@ -25,6 +25,11 @@ namespace com.checkout.data.Repository
 
         public void Add<EntityType>(EntityType entity) => _context.Add(entity);
         public void Remove<EntityType>(EntityType entity) => _context.Remove(entity);
+        public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class
+        {
+            return _context.Set<TEntity>();
+        }
+
         // add generic update method here
 
         public bool UpdateTransaction(Transaction transaction)

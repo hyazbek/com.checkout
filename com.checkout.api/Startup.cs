@@ -33,18 +33,20 @@ namespace com.checkout.api
 
         #endregion
 
-        /// <summary>
-        /// Called by the runtime to Add System Services to the container
-        /// </summary>
-        /// <param name="services"></param>
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddSystemServices();
 
-            //TODO Change this to use Azure Key Store. Temporary, must be changed
             services.AddDbContext<CKODBContext>(options =>
-             options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=CKODB;Trusted_Connection = True; MultipleActiveResultSets = true");
+            });
+            //services.AddDbContext<CKODBContext>(options =>
+            //{
+            //    options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            //});
         }
 
         /// <summary>

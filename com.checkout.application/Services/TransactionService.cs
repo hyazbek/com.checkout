@@ -31,7 +31,7 @@ namespace com.checkout.application.services
             return _contextService.Transactions.ToList().Find(itm => itm.TransactionID == transactionID);
         }
 
-        public List<Transaction> GetTransactionsByMerchantID(int merchantID)
+        public List<Transaction> GetTransactionsByMerchantID(Guid merchantID)
         {
             return _contextService.Transactions.ToList().FindAll(itm => itm.Merchant.Id == merchantID);
         }

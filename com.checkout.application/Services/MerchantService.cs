@@ -15,12 +15,7 @@ namespace com.checkout.application.services
             _contextService = contextService;
         }
 
-        /// <summary>
-        /// Search for the merchant by merchantID
-        /// </summary>
-        /// <param name="merchantID"></param>
-        /// <returns></returns>
-        public Merchant GetMerchant(int merchantID)
+        public Merchant GetMerchant(Guid merchantID)
         {
             return _contextService.Merchants.ToList().Find(itm => itm.Id == merchantID);
         }
