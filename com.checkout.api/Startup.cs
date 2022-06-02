@@ -47,7 +47,7 @@ namespace com.checkout.api
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IMerchantService, MerchantService>();
             services.AddScoped<ITransactionService, TransactionService>();
-
+            services.AddScoped<IBankService, BankService>();
             services.AddDbContext<CKODBContext>(options =>
              options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 

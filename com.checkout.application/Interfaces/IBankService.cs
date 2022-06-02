@@ -1,6 +1,6 @@
 ﻿
 
-using com.checkout.common;
+using com.checkout.application.Models;
 
 namespace com.checkout.application.Interfaces
 {

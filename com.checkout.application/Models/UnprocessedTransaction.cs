@@ -1,4 +1,4 @@
-﻿namespace com.checkout.common
+﻿namespace com.checkout.application.Models
 {
     public class UnprocessedTransaction
     {

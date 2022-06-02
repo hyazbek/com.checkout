@@ -1,6 +1,8 @@
-﻿using com.checkout.application.Helpers;
+﻿
+using com.checkout.application.Helpers;
+using System;
 
-namespace com.checkout.bank.Model
+namespace com.checkout.application.Models
 {
     public class BankResponse
     {

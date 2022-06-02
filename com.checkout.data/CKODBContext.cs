@@ -20,7 +20,6 @@ namespace com.checkout.data
         public DbSet<CardDetails> Cards { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Merchant> Merchants { get; set; }
-        public DbSet<PaymentRequest> PaymentRequests { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

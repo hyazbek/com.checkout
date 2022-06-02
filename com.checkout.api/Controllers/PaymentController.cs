@@ -1,7 +1,7 @@
 ﻿using com.checkout.api.Helpers;
+using com.checkout.application.Helpers;
 using com.checkout.application.Interfaces;
-using com.checkout.common;
-using com.checkout.common.Helpers;
+using com.checkout.application.Models;
 using com.checkout.data;
 using com.checkout.data.Model;
 using Microsoft.AspNetCore.Http;
@@ -156,7 +156,7 @@ namespace com.checkout.api.Controllers
                 CardDetails = card,
                 Amount = paymentRequest.Amount,
                 Currency = currency,
-                
+                StatusCode = TransactionCode.C_00001.ToString()
             };
 
             // save transaction in Transactions table before processing the payment with the bank.
@@ -173,7 +173,10 @@ namespace com.checkout.api.Controllers
             };
             // process bank payment, hardcoded responses from the bank and updating the transaction object with bank response
             var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction).Result;
+            transaction.Status = newTransaction.TransactionStatus.ToString();
+            transaction.StatusCode = newTransaction.TransactionCode.ToString();
 
+            _transactionService.UpdateTransaction(transaction);
 
             return Ok(transaction);
         }

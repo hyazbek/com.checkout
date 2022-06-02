@@ -1,14 +1,15 @@
-﻿using com.checkout.application.Models;
+﻿
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
-namespace com.checkout.api.Helpers
+namespace com.checkout.application.Models
 {
     public class WebRequests
     {
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        internal async static Task ProcessTransactionAsync(UnprocessedTransaction transaction)
+        public async static Task ProcessTransactionAsync(UnprocessedTransaction transaction)
         {
             var serializedTransaction = JsonSerializer.Serialize(transaction);
 

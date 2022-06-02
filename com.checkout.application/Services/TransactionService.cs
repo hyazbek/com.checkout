@@ -37,7 +37,7 @@ namespace com.checkout.application.services
 
         public bool UpdateTransaction(Transaction transaction)
         {
-            return false;// _contextService.UpdateTransaction(transaction);
+            return _contextService.UpdateTransaction(transaction);
         }
     }
 }

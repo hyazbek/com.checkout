@@ -34,5 +34,10 @@ namespace com.checkout.data.Repository
         {
             return repository._context.SaveChanges();
         }
+
+        public bool UpdateTransaction(Transaction transaction)
+        {
+            return repository.UpdateTransaction(transaction);
+        }
     }
 }

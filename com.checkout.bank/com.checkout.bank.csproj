@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\com.checkout.application\com.checkout.application.csproj" />
-    <ProjectReference Include="..\com.checkout.common\com.checkout.common.csproj" />
   </ItemGroup>
 
 </Project>
