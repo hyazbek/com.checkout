@@ -4,19 +4,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:3546",
+      "applicationUrl": "http://localhost:54023",
       "sslPort": 0
     }
   },
   "profiles": {
-    "com.checkout.api": {
+    "com.checkout.bank": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:9001",
+      "applicationUrl": "http://localhost:9000",
       "dotnetRunMessages": true
     },
     "IIS Express": {

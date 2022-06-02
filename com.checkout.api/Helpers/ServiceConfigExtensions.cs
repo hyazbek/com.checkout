@@ -20,7 +20,6 @@ namespace com.checkout.api
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IMerchantService,MerchantService>();
             services.AddScoped<ITransactionService, TransactionService>();
-            ;
 
             return services;
         }

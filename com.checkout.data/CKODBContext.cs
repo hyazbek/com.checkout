@@ -1,5 +1,7 @@
 ﻿using com.checkout.data.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 
 namespace com.checkout.data
 {
@@ -23,6 +25,7 @@ namespace com.checkout.data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
+            
             string conn = "Server=localhost\\SQLEXPRESS;Database=CKODB;Trusted_Connection = True; MultipleActiveResultSets = true";
             if (!options.IsConfigured)
             {

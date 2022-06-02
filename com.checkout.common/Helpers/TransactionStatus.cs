@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.checkout.application.Helpers
+namespace com.checkout.common.Helpers
 {
 
     public enum TransactionStatus
@@ -12,7 +12,8 @@ namespace com.checkout.application.Helpers
         Created,
         Cancelled,
         Successful,
-        Failed
+        FailedInsufficientFunds,
+        FailedExpiredCard
     }
 
 }

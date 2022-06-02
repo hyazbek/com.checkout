@@ -11,6 +11,7 @@
 
             var remainingMask = new string('x',length - 2); // we will not mask 1st and last digits
 
+
             var maskedNumber = first + remainingMask + last;
 
             return maskedNumber;

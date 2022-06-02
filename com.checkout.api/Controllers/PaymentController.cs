@@ -1,6 +1,7 @@
 ﻿using com.checkout.api.Helpers;
-using com.checkout.application.Helpers;
 using com.checkout.application.Interfaces;
+using com.checkout.common;
+using com.checkout.common.Helpers;
 using com.checkout.data;
 using com.checkout.data.Model;
 using Microsoft.AspNetCore.Http;
@@ -20,14 +21,16 @@ namespace com.checkout.api.Controllers
         private IMerchantService _merchantService;
         private ICurrencyService _currencyService;
         private ITransactionService _transactionService;
+        private IBankService _bankService;
 
-        public PaymentController(CKODBContext context, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService)
+        public PaymentController(CKODBContext context, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
         {
             _context = context;
             _cardService = cardService;
             _currencyService = currencyService;
             _merchantService = merchantService;
             _transactionService = transactionService;
+            _bankService = bankService;
         }
 
         [HttpGet]
@@ -132,6 +135,7 @@ namespace com.checkout.api.Controllers
             card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
             if (card == null)
             {
+                // add card to the system
                 card = new CardDetails
                 {
                     CardNumber = paymentRequest.Card.CardNumber,
@@ -143,6 +147,7 @@ namespace com.checkout.api.Controllers
                 _cardService.AddCard(card);
             }
 
+            // create transaction object with properties gathered above
             var transaction = new Transaction
             {
                 TransactionID = Guid.NewGuid(),
@@ -151,10 +156,24 @@ namespace com.checkout.api.Controllers
                 CardDetails = card,
                 Amount = paymentRequest.Amount,
                 Currency = currency,
-                StatusCode = TransactionStatus.Created.ToString(),
                 
             };
+
+            // save transaction in Transactions table before processing the payment with the bank.
             _transactionService.CreateTransaction(transaction);
+
+            var unprocessedTransaction = new UnprocessedTransaction
+            {
+                Amount = paymentRequest.Amount,
+                CardCvv = paymentRequest.Card.Cvv,
+                HolderName = paymentRequest.Card.HolderName,
+                CardNumber = paymentRequest.Card.CardNumber,
+                ExpiryMonth = paymentRequest.Card.CardNumber,
+                ExpiryYear = paymentRequest.Card.ExpiryYear
+            };
+            // process bank payment, hardcoded responses from the bank and updating the transaction object with bank response
+            var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction).Result;
+
 
             return Ok(transaction);
         }

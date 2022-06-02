@@ -1,21 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\com.checkout.application\com.checkout.application.csproj" />
     <ProjectReference Include="..\com.checkout.common\com.checkout.common.csproj" />
-    <ProjectReference Include="..\com.checkout.data\com.checkout.data.csproj" />
   </ItemGroup>
 
 </Project>
