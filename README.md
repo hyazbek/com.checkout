@@ -117,7 +117,7 @@ dotnet ef database update
 ### Docker
 - Added docker support for com.checkout.api but was not able to test it (fingers crossed :D )
 
-### Deploy to Azure App Service
+### Deploy to Azure Api Management
 - 
 
 ### Enable Analytics
@@ -130,3 +130,5 @@ dotnet ef database update
 [entityframeworktutorial](https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx)
 
 [Docker Article](https://softchris.github.io/pages/dotnet-dockerize.html#create-a-dockerfile)
+
+[Azure Api Management](https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-api-management-using-vs?view=aspnetcore-6.0)
