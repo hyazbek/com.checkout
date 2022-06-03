@@ -2,6 +2,11 @@
 
 com.checkout is a .net api that simulates a payment gateway.
 
+### Live APIs on MS Azure
+- [Payment API](https://comcheckoutapi.azurewebsites.net/swagger/index.html)
+- [Bank API](https://comcheckoutbank.azurewebsites.net/swagger/index.html)
+
+
 ## Deliverables
 
 ### com.checkout.api
@@ -117,9 +122,6 @@ dotnet ef database update
 ### Docker
 - Added docker support for com.checkout.api but was not able to test it (fingers crossed :D )
 
-### Deploy to Azure Api Management
-- [Payment API](https://comcheckoutapi.azurewebsites.net/swagger/index.html)
-- [Bank API](https://comcheckoutbank.azurewebsites.net/swagger/index.html)
 
 ### Enable App Insights
 - Application Insigts are enabled on Azure App Service
