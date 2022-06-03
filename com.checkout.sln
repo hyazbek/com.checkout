@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.checkout.data", "com.ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.checkout.application", "com.checkout.application\com.checkout.application.csproj", "{7EEA6343-A745-4328-B2A0-8999F8480F4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.checkout.bank", "com.checkout.bank\com.checkout.bank.csproj", "{0FC7BBBF-FFFF-4CA6-9489-CD60A4FA04A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.checkout.bank", "com.checkout.bank\com.checkout.bank.csproj", "{0FC7BBBF-FFFF-4CA6-9489-CD60A4FA04A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.checkout.tests", "com.checkout.tests\com.checkout.tests.csproj", "{84769DB0-5B6B-4541-AF63-0F662301FD30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0FC7BBBF-FFFF-4CA6-9489-CD60A4FA04A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FC7BBBF-FFFF-4CA6-9489-CD60A4FA04A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FC7BBBF-FFFF-4CA6-9489-CD60A4FA04A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84769DB0-5B6B-4541-AF63-0F662301FD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84769DB0-5B6B-4541-AF63-0F662301FD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84769DB0-5B6B-4541-AF63-0F662301FD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84769DB0-5B6B-4541-AF63-0F662301FD30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

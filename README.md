@@ -136,3 +136,5 @@ dotnet ef database update
 [Docker Article](https://softchris.github.io/pages/dotnet-dockerize.html#create-a-dockerfile)
 
 [Azure Api Management](https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-api-management-using-vs?view=aspnetcore-6.0)
+
+[API Unit Tests](https://code-maze.com/unit-testing-aspnetcore-web-api/)

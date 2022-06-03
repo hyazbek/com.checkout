@@ -19,5 +19,10 @@ namespace com.checkout.application.services
         {
             return _contextService.Merchants.ToList().Find(itm => itm.Id == merchantID);
         }
+
+        public List<Merchant> GetMerchants()
+        {
+            return _contextService.Merchants.ToList();
+        }
     }
 }

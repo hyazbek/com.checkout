@@ -15,17 +15,15 @@ namespace com.checkout.api.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        
-        private readonly CKODBContext _context;
+       
         private ICardService _cardService;
         private IMerchantService _merchantService;
         private ICurrencyService _currencyService;
         private ITransactionService _transactionService;
         private IBankService _bankService;
 
-        public PaymentController(CKODBContext context, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
+        public PaymentController(ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
         {
-            _context = context;
             _cardService = cardService;
             _currencyService = currencyService;
             _merchantService = merchantService;
@@ -34,25 +32,18 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllCurrencies")]
-        public async Task<ActionResult<List<CardDetails>>> Get()
-        {
-            return Ok(await _context.Currencies.ToListAsync());
-        }
-
-        [HttpGet]
         [Route("GetAllCards")]
-        public async Task<IActionResult> GetAllCards()
+        public ActionResult GetAllCards()
         {
-            return Ok(await _context.Cards.ToListAsync());
+            return Ok( _cardService.GetAllCards());//
         }
         [HttpGet]
         [Route("GetAllMerchants")]
-        public async Task<IActionResult> GetAllMerchants()
+        public ActionResult GetAllMerchants()
         {
-            var merchants = await _context.Merchants
-                .Select(itm => itm)
-                .ToArrayAsync();
+            var merchants = _merchantService.GetMerchants();
+                //.Select(itm => itm)
+                //.ToArrayAsync();
             var response = merchants.Select(itm => itm);
 
             return Ok(response);
@@ -60,38 +51,37 @@ namespace com.checkout.api.Controllers
 
         [HttpGet]
         [Route("GetAllTransactions")]
-        public async Task<IActionResult> GetAllTransactions()
+        public ActionResult GetAllTransactions()
         {
-            var transactions = await _context.Transactions
-                .Include(itm => itm.Merchant)
-                .Include(itm => itm.CardDetails)
-                .Include(itm => itm.Currency)
-                .ToArrayAsync();
-            
+            var transactions = _transactionService.GetAllTransactions();
 
             return Ok(transactions);
         }
 
         [HttpGet]
         [Route("GetTransactionByID")]
-        public async Task<IActionResult> GetTransactionByID(Guid transactionId)
+        public ActionResult GetTransactionByID(Guid transactionId)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             var response = new TransactionResponse();
 
             var entity = _transactionService.GetTransactionById(transactionId);
-
+            if(entity == null)
+            {
+                return BadRequest("Invalid Transaction");
+            }
             var currency = _currencyService.GetCurrencyByID(entity.CurrencyID);
             response.Currency = currency.CurrencyCode;
 
             response.Amount = entity.Amount;
-            //response.BankReferenceID = entity.BankReferenceID;
+            
             response.Status = entity.Status;
 
             var card = _cardService.GetCardDetailsByID(entity.CardDetailsID);
-
+            if (card == null)
+            {
+                return BadRequest("Invalid Card");
+            }
             card.CardNumber = CardHelper.MaskCarNumber(card.CardNumber);
             response.Card = card;
 
