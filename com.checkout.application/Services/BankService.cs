@@ -17,8 +17,9 @@ namespace com.checkout.application.services
                 Timeout = new TimeSpan(0, 5, 0)
             };
             var bankResponse = new BankResponse();
-            using(var client = _httpClient)
+            using(var client = _httpClient) 
             {
+
                 StringContent content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
                 using (var response = client.PostAsync("http://localhost:5074/BankTransaction/ProcessTransaction", content))
                 {
