@@ -114,10 +114,19 @@ dotnet ef database update
 ![alt text](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
 
 ## The Extra Mile 
-- Host the API on Azure
-- Dockerization
+### Docker
+- Added docker support for com.checkout.api but was not able to test it (fingers crossed :D )
+
+### Deploy to Azure App Service
+- 
+
+### Enable Analytics
+- 
+
 
 ## Articles and Tutorials used
 [Clean Architecture](https://www.c-sharpcorner.com/article/implementing-a-clean-architecture-in-asp-net-core-6/)
 
-[www.entityframeworktutorial.net](https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx)
+[entityframeworktutorial](https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx)
+
+[Docker Article](https://softchris.github.io/pages/dotnet-dockerize.html#create-a-dockerfile)
