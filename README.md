@@ -11,9 +11,19 @@ Bank API that will be called from the payment processing api and returns the sta
 
 ## Assumptions
 
-## Some Details
+1- Assumed that all cards added are valid cards, no card number validation or formatting is implemented, we can create more functions with regex to validate card number format.
 
-### Step 1: Payment Process
+2- More checks and validations need to be implemented in the bank api, but for the sake of simplifying and the demo, only 2 checks are implemented:
+
+- Any transaction with an amount > 1000 will be declined, that is to simulate status changes.
+
+- Check if the card is expired and return the appropriate Status and Status Code.
+
+3- Card Number Masking will display 1st and last digit of the card and replace all other digits with 'x'
+
+## Payment Processing Flow
+
+### Step 1: Post Payment
 Note: if a card does not exist in the system, it will be created and added to the Cards Table using the CardService.
 
 The payment request will be added into the Transactions Table with a default TransactionStatus = "Created" and Transaction Code = "C_00001"
@@ -68,29 +78,46 @@ public enum TransactionCode
         SD_20054    // Soft Decline Expired Card
     }
 ```
-### Step 3: Update Transaction in the Database with the TransactionStatus and TransactionCode
+### Step 3: Update Transaction
+
+Update Database with the TransactionStatus and TransactionCode
   
 ![alt text](https://dub01pap003files.storage.live.com/y4mzh_dbJ2GOar2qFtL-DeOLEVlyOrWw2yIsSilYHQIkwPcH50PxJ_vBHJvVJnTfoIpM5NjylLABhcB_KptlezEVup_0DTPvTJGTtIzlnfD_os5n78KSgLMU_yY5EgcOziilZ0zdrR9SZXuHe_Nrhkooba2FOyJB0N710fTVQ39GgiD6U3xLKwInjWw3oJHhS2FwDAvQzr8desj8gz3Uz9iKG0-OaYfmprU-VPWVFKd2bE?encodeFailures=1&width=916&height=117)
 
-## Usage
+## Get Payment by Transaction ID
+/GetTransactionByID takes a TransactionGUID and gets the transaction details in the form of a TransactionResponse Object:
+- (string) Currency
+- (decimal) Amount
+- (string) Status
+- (String) StatusCode
+- (CardDetails) with all card details but with a Masked Card Number
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+## Deployment
+- install dotnet ef cli 
+```
+dotnet tool install --global dotnet-ef
+```
+- add dotnet ef migrations
+```
+dotnet ef migrations add [Name]
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+- run database update command to create the database and the dummy data form the Migrations Folder.
+```
+dotnet ef database update
 
-Please make sure to update tests as appropriate.
+```
+- BankAPI url is hardcoded in the code for now, make sure that com.checkout.bank  App URL (in the project settings is the same as the one in the app.config file of com.checkout.api)
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+- Make sure set startup projects in the solution to com.checkout.api and com.checkout.bank 
+
+![alt text](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
+
+## The Extra Mile 
+- Host the API on Azure
+- Dockerization
+
+## Articles and Tutorials used
+[Clean Architecture](https://www.c-sharpcorner.com/article/implementing-a-clean-architecture-in-asp-net-core-6/)
+
+[www.entityframeworktutorial.net](https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx)
