@@ -118,7 +118,8 @@ dotnet ef database update
 - Added docker support for com.checkout.api but was not able to test it (fingers crossed :D )
 
 ### Deploy to Azure Api Management
-- 
+- [Payment API](https://comcheckoutapi.azurewebsites.net/swagger/index.html)
+- [Bank API](https://comcheckoutbank.azurewebsites.net/swagger/index.html)
 
 ### Enable Analytics
 - 

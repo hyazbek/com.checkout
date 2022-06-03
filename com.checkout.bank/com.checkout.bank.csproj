@@ -14,4 +14,8 @@
     <ProjectReference Include="..\com.checkout.application\com.checkout.application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
 </Project>

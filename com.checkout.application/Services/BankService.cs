@@ -21,7 +21,7 @@ namespace com.checkout.application.services
             {
 
                 StringContent content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
-                using (var response = client.PostAsync("http://localhost:5074/BankTransaction/ProcessTransaction", content))
+                using (var response = client.PostAsync("https://comcheckoutbank.azurewebsites.net/BankTransaction/ProcessTransaction", content))
                 {
                     string apiResponse = await response.Result.Content.ReadAsStringAsync();
                     bankResponse = JsonConvert.DeserializeObject<BankResponse>(apiResponse);

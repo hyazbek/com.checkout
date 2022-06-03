@@ -38,9 +38,15 @@ namespace com.checkout.api
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ckoapi", Version = "v1" });
+            //});
             services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                 .ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
-            //services.AddSystemServices();
+
+            
             services.AddScoped<EFRepository>();
             services.AddScoped<RepositoryService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
@@ -48,13 +54,9 @@ namespace com.checkout.api
             services.AddScoped<IMerchantService, MerchantService>();
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<IBankService, BankService>();
+
             services.AddDbContext<CKODBContext>(options =>
              options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CKO API", Version = "v1" });
-            });
 
 
         }
@@ -66,12 +68,12 @@ namespace com.checkout.api
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CKO API v1"));
-            }
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
+           // }
             //var context = serviceProvider.GetService<CKODBContext>();
             //context.Database.EnsureDeleted();
             //context.LoadTestData(context);
