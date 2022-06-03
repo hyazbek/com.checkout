@@ -82,7 +82,7 @@ public enum TransactionCode
 
 Update Database with the TransactionStatus and TransactionCode
   
-![alt text](https://dub01pap003files.storage.live.com/y4mzh_dbJ2GOar2qFtL-DeOLEVlyOrWw2yIsSilYHQIkwPcH50PxJ_vBHJvVJnTfoIpM5NjylLABhcB_KptlezEVup_0DTPvTJGTtIzlnfD_os5n78KSgLMU_yY5EgcOziilZ0zdrR9SZXuHe_Nrhkooba2FOyJB0N710fTVQ39GgiD6U3xLKwInjWw3oJHhS2FwDAvQzr8desj8gz3Uz9iKG0-OaYfmprU-VPWVFKd2bE?encodeFailures=1&width=916&height=117)
+![Database Screenshot](https://dub01pap003files.storage.live.com/y4mzh_dbJ2GOar2qFtL-DeOLEVlyOrWw2yIsSilYHQIkwPcH50PxJ_vBHJvVJnTfoIpM5NjylLABhcB_KptlezEVup_0DTPvTJGTtIzlnfD_os5n78KSgLMU_yY5EgcOziilZ0zdrR9SZXuHe_Nrhkooba2FOyJB0N710fTVQ39GgiD6U3xLKwInjWw3oJHhS2FwDAvQzr8desj8gz3Uz9iKG0-OaYfmprU-VPWVFKd2bE?encodeFailures=1&width=916&height=117)
 
 ## Get Payment by Transaction ID
 /GetTransactionByID takes a TransactionGUID and gets the transaction details in the form of a TransactionResponse Object:
@@ -111,7 +111,7 @@ dotnet ef database update
 
 - Make sure set startup projects in the solution to com.checkout.api and com.checkout.bank 
 
-![alt text](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
+![Multiple Startup Projects](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
 
 ## The Extra Mile 
 ### Docker
@@ -121,8 +121,9 @@ dotnet ef database update
 - [Payment API](https://comcheckoutapi.azurewebsites.net/swagger/index.html)
 - [Bank API](https://comcheckoutbank.azurewebsites.net/swagger/index.html)
 
-### Enable Analytics
-- 
+### Enable App Insights
+- Application Insigts are enabled on Azure App Service
+![Azure App Insights](https://dub01pap003files.storage.live.com/y4mMEBKLGTGldkDKK4UUS9CsdhuT8CP7hyz1tdly_Db09P7V1FyoFHHeaf0rgymECE0AxtV_ovsC5cK7ysOgCNr3nexFoyumQGykG-y4-iW_GJnO5_MFTapkwQvnSb-hspgtgTHhFTKLIoKP_wmH0y8362QzY-8feF0dK5guxg7ikQOWyMIFmcSTde0Vt3RR1kdOZDMwBXV_kEgbsV488whVSrac8u4tGJdiPGpi-pb4V0?encodeFailures=1&width=1323&height=590)
 
 
 ## Articles and Tutorials used
