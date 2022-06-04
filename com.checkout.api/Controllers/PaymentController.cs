@@ -79,6 +79,7 @@ namespace com.checkout.api.Controllers
             {
                 return BadRequest("Invalid Card");
             }
+
             card.CardNumber = CardHelper.MaskCarNumber(card.CardNumber);
             response.Card = card;
 
@@ -120,9 +121,14 @@ namespace com.checkout.api.Controllers
 
             var card = new CardDetails();
             card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
-            if (card == null)
+            if (card != null)
             {
-                // add card to the system
+                if (!CardExpired(card.ExpiryMonth, card.ExpiryYear)){
+                    return BadRequest("Card Expired");
+                }
+            }
+            else
+            {
                 card = new CardDetails
                 {
                     CardNumber = paymentRequest.Card.CardNumber,
@@ -131,6 +137,9 @@ namespace com.checkout.api.Controllers
                     ExpiryMonth = paymentRequest.Card.ExpiryMonth,
                     ExpiryYear = paymentRequest.Card.ExpiryYear,
                 };
+                if (!CardExpired(card.ExpiryMonth, card.ExpiryYear)){
+                    return BadRequest("Card Expired");
+                }
                 _cardService.AddCard(card);
             }
 
@@ -167,6 +176,21 @@ namespace com.checkout.api.Controllers
             _transactionService.UpdateTransaction(transaction);
 
             return Ok(transaction);
+        }
+
+        private bool CardExpired(string expiryMonth, string expiryYear)
+        {
+            if (expiryMonth == null || expiryYear == null) { return false; }
+            DateTime dateValue;
+
+            if (DateTime.TryParse("01/" + expiryMonth + '/' + expiryYear, out dateValue))
+                if (dateValue < DateTime.Now)
+                    return false;
+                else
+                    return true;
+            else
+                return false;
+
         }
     }
 }

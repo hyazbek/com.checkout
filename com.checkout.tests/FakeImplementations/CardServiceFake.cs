@@ -23,8 +23,8 @@ namespace com.checkout.tests.FakeImplementations
                     CardNumber = "777777777",
                     Cvv = "777",
                     ExpiryMonth="12",
-                    ExpiryYear="2025",
-                    HolderName="Test Card 1"
+                    ExpiryYear="2020",
+                    HolderName="Test Card 1 Expired"
                 },
                 new CardDetails()
                 {

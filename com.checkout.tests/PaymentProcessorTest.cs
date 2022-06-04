@@ -75,7 +75,7 @@ namespace com.checkout.tests
             PaymentRequest paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
-                Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
+                Card = new CardDetails() { CardDetailsID = 3, CardNumber = "65432154567", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2033", HolderName = "Unit Testing" },
                 CurrencyID = 3,
                 MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
             };
@@ -124,6 +124,21 @@ namespace com.checkout.tests
                 Amount = -999,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
                 CurrencyID = 4,
+                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+            };
+            var okResult = _controller.ProcessTransaction(paymentRequest).Result;
+
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+        [Fact]
+        public void Post_WhenCalled_ExpiredCardReturnsBadRequest()
+        {
+
+            PaymentRequest paymentRequest = new PaymentRequest()
+            {
+                Amount = 999,
+                Card = new CardDetails() { CardDetailsID = 10, CardNumber = "777777777", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2020", HolderName = "Unit Testing" },
+                CurrencyID = 3,
                 MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
             };
             var okResult = _controller.ProcessTransaction(paymentRequest).Result;
