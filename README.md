@@ -140,3 +140,5 @@ dotnet ef database update
 [Azure Api Management](https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-api-management-using-vs?view=aspnetcore-6.0)
 
 [API Unit Tests](https://code-maze.com/unit-testing-aspnetcore-web-api/)
+
+[API Integration Tests](https://code-maze.com/aspnet-core-integration-testing/)
