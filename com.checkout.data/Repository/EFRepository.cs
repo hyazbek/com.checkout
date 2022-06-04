@@ -17,14 +17,17 @@ namespace com.checkout.data.Repository
             this._context = context;
         }
 
-        public IQueryable<CardDetails> Cards => _context.Cards;
-        public IQueryable<Currency> Currencies => _context.Currencies;
-        public IQueryable<Merchant> Merchants => _context.Merchants;
-        public IQueryable<Transaction> Transactions => _context.Transactions;
+        //public IQueryable<CardDetails> Cards => _context.Cards;
+        //public IQueryable<Currency> Currencies => _context.Currencies;
+        //public IQueryable<Merchant> Merchants => _context.Merchants;
+        //public IQueryable<Transaction> Transactions => _context.Transactions;
 
 
-        public void Add<EntityType>(EntityType entity) => _context.Add(entity);
-        public void Remove<EntityType>(EntityType entity) => _context.Remove(entity);
+        public void Add<EntityType>(EntityType entity)
+        {
+            _context.Add(entity);
+            _context.SaveChanges();
+        }
         public IQueryable<TEntity> GetAll<TEntity>() where TEntity : class
         {
             return _context.Set<TEntity>();
@@ -33,18 +36,21 @@ namespace com.checkout.data.Repository
         {
             return _context.Set<TEntity>().Where(predicate);
         }
-
+        public bool Update<TEntity>(TEntity item) where TEntity : class
+        {
+            _context.Attach(item);
+            _context.Update(item);
+            return true;
+        }
         // add generic update method here
 
-        public bool UpdateTransaction(Transaction transaction)
-        {
-            _context.Transactions.Update(transaction);
-            int status = _context.SaveChanges();
+        //public bool UpdateTransaction(Transaction transaction)
+        //{
+        //    _context.Update<Transaction>(transaction);//.Update(transaction);
+        //    int status = _context.SaveChanges();
 
-            return status == 1 ? true : false;
-        }
+        //    return status == 1 ? true : false;
+        //}
 
-
-        public void SaveChanges() => _context.SaveChanges();
     }
 }

@@ -131,6 +131,8 @@ dotnet ef database update
 ## Articles and Tutorials used
 [Clean Architecture](https://www.c-sharpcorner.com/article/implementing-a-clean-architecture-in-asp-net-core-6/)
 
+[Generic Repository](https://www.c-sharpcorner.com/article/generic-repository-pattern-in-asp-net-core/)
+
 [entityframeworktutorial](https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx)
 
 [Docker Article](https://softchris.github.io/pages/dotnet-dockerize.html#create-a-dockerfile)

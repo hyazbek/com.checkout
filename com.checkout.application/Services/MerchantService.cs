@@ -17,12 +17,12 @@ namespace com.checkout.application.services
 
         public Merchant GetMerchant(Guid merchantID)
         {
-            return _contextService.Merchants.ToList().Find(itm => itm.Id == merchantID);
+            return _contextService.GetAll<Merchant>().ToList().Find(itm => itm.Id == merchantID);
         }
 
         public List<Merchant> GetMerchants()
         {
-            return _contextService.Merchants.ToList();
+            return _contextService.GetAll<Merchant>().ToList();
         }
     }
 }

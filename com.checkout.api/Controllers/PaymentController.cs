@@ -162,6 +162,7 @@ namespace com.checkout.api.Controllers
                 ExpiryYear = paymentRequest.Card.ExpiryYear
             };
             // process bank payment, hardcoded responses from the bank and updating the transaction object with bank response
+
             var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction).Result;
             transaction.Status = newTransaction.TransactionStatus.ToString();
             transaction.StatusCode = newTransaction.TransactionCode.ToString();

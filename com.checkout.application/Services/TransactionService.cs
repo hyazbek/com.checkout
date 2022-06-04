@@ -10,8 +10,8 @@ namespace com.checkout.application.services
 {
     public class TransactionService : ITransactionService
     {
-        private readonly RepositoryService _contextService;
-        public TransactionService(RepositoryService contextService)
+        private readonly EFRepository _contextService;
+        public TransactionService(EFRepository contextService)
         {
             _contextService = contextService;
         }
@@ -37,7 +37,7 @@ namespace com.checkout.application.services
 
         public bool UpdateTransaction(Transaction transaction)
         {
-            return _contextService.UpdateTransaction(transaction);
+            return _contextService.Update<Transaction>(transaction);
         }
     }
 }

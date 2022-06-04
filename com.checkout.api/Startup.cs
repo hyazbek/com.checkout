@@ -39,16 +39,12 @@ namespace com.checkout.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ckoapi", Version = "v1" });
-            //});
+
             services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                 .ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
 
             
             services.AddScoped<EFRepository>();
-            services.AddScoped<RepositoryService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IMerchantService, MerchantService>();
@@ -68,15 +64,11 @@ namespace com.checkout.api
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            //if (env.IsDevelopment())
-            //{
+
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
-           // }
-            //var context = serviceProvider.GetService<CKODBContext>();
-            //context.Database.EnsureDeleted();
-            //context.LoadTestData(context);
+
 
             app.UseHttpsRedirection();
 

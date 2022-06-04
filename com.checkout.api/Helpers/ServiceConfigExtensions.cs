@@ -15,7 +15,7 @@ namespace com.checkout.api
         {
 
             services.AddScoped<EFRepository>();
-            services.AddScoped<RepositoryService>();
+           // services.AddScoped<RepositoryService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IMerchantService,MerchantService>();
