@@ -3,6 +3,8 @@
 com.checkout is a .net api that simulates a payment gateway.
 
 ### Live APIs on MS Azure
+Api was deployed to MS Azure, you can check the working versions on the below links:
+
 - [Payment API](https://comcheckoutapi.azurewebsites.net/swagger/index.html)
 - [Bank API](https://comcheckoutbank.azurewebsites.net/swagger/index.html)
 
