@@ -46,5 +46,36 @@ namespace com.checkout.tests
 
             Assert.IsType<OkObjectResult>(okResult as OkObjectResult);
         }
+
+        [Fact]
+        public void Get_WhenCalled_ReturnAllCardsInTheDatabase()
+        {
+            var okResult = _controller.GetAllCards() as OkObjectResult;
+
+            var transactions = Assert.IsType<List<CardDetails>>(okResult.Value).Count;
+
+            Assert.Equal(2, transactions);
+        }
+
+        [Fact]
+        public void Get_WhenCalled_ReturnAllMerchantsInTheDatabase()
+        {
+            var okResult = _controller.GetAllMerchants() as OkObjectResult;
+
+            var transactions = Assert.IsType<List<Merchant>>(okResult.Value).Count;
+
+            Assert.Equal(1, transactions);
+        }
+
+        [Fact]
+        public void Post_WhenCalled_StartPaymentProcess()
+        {
+            PaymentRequest
+            var okResult = _controller.ProcessTransaction(
+
+            var transactions = Assert.IsType<List<Merchant>>(okResult.Value).Count;
+
+            Assert.Equal(1, transactions);
+        }
     }
 }

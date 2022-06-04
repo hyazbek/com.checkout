@@ -35,18 +35,15 @@ namespace com.checkout.api.Controllers
         [Route("GetAllCards")]
         public ActionResult GetAllCards()
         {
-            return Ok( _cardService.GetAllCards());//
+            return Ok( _cardService.GetAllCards());
         }
+
         [HttpGet]
         [Route("GetAllMerchants")]
         public ActionResult GetAllMerchants()
         {
-            var merchants = _merchantService.GetMerchants();
-                //.Select(itm => itm)
-                //.ToArrayAsync();
-            var response = merchants.Select(itm => itm);
 
-            return Ok(response);
+            return Ok(_merchantService.GetMerchants());
         }
 
         [HttpGet]
