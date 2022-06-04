@@ -16,7 +16,7 @@ Bank API that will be called from the payment processing api and returns the sta
 
 ## Assumptions
 
-1- Assumed that all cards added are valid cards, no card number validation or formatting is implemented, we can create more functions with regex to validate card number format.
+1- Assumed that all cards added are valid cards, no card number validation or formatting is implemented, we can create more functions with regex to validate card number format, validate expiry date, etc.
 
 2- More checks and validations need to be implemented in the bank api, but for the sake of simplifying and the demo, only 2 checks are implemented:
 
