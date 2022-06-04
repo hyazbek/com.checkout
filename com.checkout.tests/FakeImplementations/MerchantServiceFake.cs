@@ -20,7 +20,7 @@ namespace com.checkout.tests.FakeImplementations
                 new Merchant()
                 {
                     Country = "USA",
-                    Id = new Guid(),
+                    Id = new Guid("BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"),
                     Name = "Amazon"
                 }
             };

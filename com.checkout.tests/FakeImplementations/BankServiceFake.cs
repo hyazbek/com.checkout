@@ -38,7 +38,8 @@ namespace com.checkout.tests.FakeImplementations
 
         public Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction)
         {
-            throw new NotImplementedException();
+            var response = new BankResponse() { BankResponseID = new Guid(), TransactionCode = TransactionCode.C_00001, TransactionStatus = TransactionStatus.Created };
+            return Task.FromResult(response);
         }
     }
 }

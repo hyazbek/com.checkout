@@ -1,4 +1,5 @@
 using com.checkout.api.Controllers;
+using com.checkout.api.Helpers;
 using com.checkout.application.Interfaces;
 using com.checkout.application.services;
 using com.checkout.data.Model;
@@ -70,12 +71,64 @@ namespace com.checkout.tests
         [Fact]
         public void Post_WhenCalled_StartPaymentProcess()
         {
-            PaymentRequest
-            var okResult = _controller.ProcessTransaction(
 
-            var transactions = Assert.IsType<List<Merchant>>(okResult.Value).Count;
+            PaymentRequest paymentRequest = new PaymentRequest()
+            {
+                Amount = 999,
+                Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
+                CurrencyID = 3,
+                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+            };
+            var okResult = _controller.ProcessTransaction(paymentRequest).Result as OkObjectResult;
 
-            Assert.Equal(1, transactions);
+            Assert.IsType<Transaction>(okResult.Value);
+        }
+
+        [Fact]
+        public void Post_WhenCalled_InvalidMerchantReturnsBadRequest()
+        {
+
+            PaymentRequest paymentRequest = new PaymentRequest()
+            {
+                Amount = 999,
+                Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
+                CurrencyID = 3,
+                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A1B8908"
+            };
+            var okResult = _controller.ProcessTransaction(paymentRequest).Result;
+
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+        [Fact]
+        public void Post_WhenCalled_InvalidCurrencyReturnsBadRequest()
+        {
+
+            PaymentRequest paymentRequest = new PaymentRequest()
+            {
+                Amount = 999,
+                Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
+                CurrencyID = 4,
+                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+            };
+            var okResult = _controller.ProcessTransaction(paymentRequest).Result;
+
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void Post_WhenCalled_InvalidAmountReturnsBadRequest()
+        {
+
+            PaymentRequest paymentRequest = new PaymentRequest()
+            {
+                Amount = -999,
+                Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
+                CurrencyID = 4,
+                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+            };
+            var okResult = _controller.ProcessTransaction(paymentRequest).Result;
+
+            Assert.IsType<BadRequestObjectResult>(okResult);
         }
     }
 }
