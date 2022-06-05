@@ -20,13 +20,13 @@ namespace com.checkout.bank.Controllers
 
             if (transaction.Amount < moneyInAccount)
             {
-                response.BankResponseID = new Guid();
+                response.BankResponseID = Guid.NewGuid();
                 response.TransactionStatus = TransactionStatus.Accepted;
                 response.TransactionCode = TransactionCode.A_10000;
             }
             else
             {
-                response.BankResponseID = new Guid();
+                response.BankResponseID = Guid.NewGuid();
                 response.TransactionStatus = TransactionStatus.FailedInsufficientFunds;
                 response.TransactionCode = TransactionCode.SD_20051;
             }

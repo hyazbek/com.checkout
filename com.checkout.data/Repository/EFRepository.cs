@@ -40,6 +40,7 @@ namespace com.checkout.data.Repository
         {
             _context.Attach(item);
             _context.Update(item);
+            _context.SaveChanges();
             return true;
         }
         // add generic update method here
