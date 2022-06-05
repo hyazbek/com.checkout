@@ -154,7 +154,7 @@ i guess i could split all these checks into seperate methods for better code rea
 
 ### Enable App Insights
 - Application Insigts are enabled on Azure App Service
-![Azure App Insights](https://dub01pap003files.storage.live.com/y4mMEBKLGTGldkDKK4UUS9CsdhuT8CP7hyz1tdly_Db09P7V1FyoFHHeaf0rgymECE0AxtV_ovsC5cK7ysOgCNr3nexFoyumQGykG-y4-iW_GJnO5_MFTapkwQvnSb-hspgtgTHhFTKLIoKP_wmH0y8362QzY-8feF0dK5guxg7ikQOWyMIFmcSTde0Vt3RR1kdOZDMwBXV_kEgbsV488whVSrac8u4tGJdiPGpi-pb4V0?encodeFailures=1&width=1323&height=590)
+![Azure App Insights](https://dub01pap003files.storage.live.com/y4mi1DPfdyW89ZrpBb4WJEfxFDwqXaiZla9r5RmA8jKdC4JUOaNUggM9ZgAGqsStHlf-YlTBCYDhXbDxAhbJh4J_bVT9PpCqmzj45_Be6wnani6PSSzfKeV8Q9EuCjJe-ztDaXcfocOukeqrTAxiw8r82RXrMLfXOrv0RUCBaMABlCml8tUkdpmSgICxyMBu0a2H3SY7P33TaB_d3Yy2c1E3raEgqFx4KEU-GAZzk5toSs?encodeFailures=1&width=1101&height=613)
 
 
 ## Articles and Tutorials used
