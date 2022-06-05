@@ -83,7 +83,7 @@ namespace com.checkout.tests
             PaymentRequest paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
-                Card = new CardDetails() { CardDetailsID = 3, CardNumber = "65432154567", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2033", HolderName = "Unit Testing" },
+                Card = new CardDetails() { CardDetailsID = 3, CardNumber = "4953089013607", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2033", HolderName = "Unit Testing" },
                 CurrencyID = 3,
                 MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
             };

@@ -139,6 +139,7 @@ namespace com.checkout.api.Controllers
                     ExpiryMonth = paymentRequest.Card.ExpiryMonth,
                     ExpiryYear = paymentRequest.Card.ExpiryYear,
                 };
+                
                 if (!CardExpired(card.ExpiryMonth, card.ExpiryYear)){
                     return BadRequest("Card Expired");
                 }

@@ -8,5 +8,6 @@ namespace com.checkout.application.Interfaces
         CardDetails GetCardDetailsByNumber(string cardNumber);
         CardDetails GetCardDetailsByID(int cardID);
         void AddCard(CardDetails card);
+        bool ValidateCard(CardDetails card);
     }
 }

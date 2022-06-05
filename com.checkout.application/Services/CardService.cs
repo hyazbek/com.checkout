@@ -3,7 +3,7 @@
 using com.checkout.application.Interfaces;
 using com.checkout.data.Model;
 using com.checkout.data.Repository;
-
+using CreditCardValidator;
 
 namespace com.checkout.application.services
 {
@@ -34,6 +34,12 @@ namespace com.checkout.application.services
         public CardDetails GetCardDetailsByNumber(string cardNumber)
         {
             return _contextService.GetAll<CardDetails>().ToList().Find(itm => itm.CardNumber == cardNumber);
+        }
+
+        public bool ValidateCard(CardDetails card)
+        {
+            CreditCardDetector detector = new CreditCardDetector(card.CardNumber);
+            return detector.IsValid();
         }
     }
 }

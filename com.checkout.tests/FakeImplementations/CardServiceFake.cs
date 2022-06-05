@@ -1,6 +1,7 @@
 ﻿using com.checkout.application.Helpers;
 using com.checkout.application.Interfaces;
 using com.checkout.data.Model;
+using CreditCardValidator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace com.checkout.tests.FakeImplementations
                 new CardDetails()
                 {
                     CardDetailsID = 11,
-                    CardNumber = "8888888888",
+                    CardNumber = "4953089013607",
                     Cvv = "888",
                     ExpiryMonth="12",
                     ExpiryYear="2030",
@@ -56,6 +57,12 @@ namespace com.checkout.tests.FakeImplementations
         public CardDetails GetCardDetailsByNumber(string cardNumber)
         {
             return _cards.Find(itm => itm.CardNumber == cardNumber);
+        }
+
+        public bool ValidateCard(CardDetails card)
+        {
+            CreditCardDetector detector = new CreditCardDetector(card.CardNumber);
+            return detector.IsValid();
         }
     }
 }
