@@ -120,6 +120,23 @@ dotnet ef database update
 
 ![Multiple Startup Projects](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
 
+## Process Transaction Code
+
+The process transaction method does the below actions
+1- Check if PaymentRequest is null
+2- check if Amount <= 0
+3- check if the merchant is valid (exists in the database buy comparing MerchantID)
+4- Check if currency is valid (exists in the DB)
+5- Check if card exists in the database (by card number), if it doest not, create a new card and add it to the cards table
+6- create a transaction object and save it in transactions table with default status
+7- create unproccessed transaction object and pass it to the mock bank service
+8- bank service will check if user has sufficient funds (hardcoded to 1000)
+9- update transaction status and code
+10- return Ok message reponse if all the above completed without errors
+
+i guess i could split all these checks into seperate methods for better code readability
+
+
 ## The Extra Mile 
 ### Docker
 - Added docker support for com.checkout.api but was not able to test it (fingers crossed :D )
