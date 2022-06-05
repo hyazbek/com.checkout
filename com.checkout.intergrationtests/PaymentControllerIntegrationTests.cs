@@ -24,18 +24,17 @@ namespace com.checkout.intergrationtests
             var response = await _httpClient.GetAsync("/Payment/GetAllCards");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
-            Assert.Contains("1111111111111111", responseString);
-            Assert.Contains("56431264879", responseString);
+            Assert.Contains("123456789", responseString);
         }
 
         [Fact]
         public async Task Get_WhenCalled_ReturnsTransactionByID()
         {
-            var response = await _httpClient.GetAsync("/Payment/GetTransactionByID?transactionId=4D1D60EC-5EE6-4A87-8D0C-33CB53FA7408");
+            var response = await _httpClient.GetAsync("/Payment/GetTransactionByID?transactionId=ED9A5B76-B5CC-46F6-9372-7657A2812158");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
-            Assert.Contains("456", responseString);
-            Assert.Contains("Hilal Yazbek", responseString);
+            Assert.Contains("322", responseString);
+            
         }
 
         [Fact]
@@ -48,7 +47,7 @@ namespace com.checkout.intergrationtests
                 Amount = 444,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
                 CurrencyID = 3,
-                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+                MerchantID = "1C4352E9-BEB6-4C7F-8BFC-9263DE60238B"
             };
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);
@@ -74,7 +73,7 @@ namespace com.checkout.intergrationtests
                 Amount = 444,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
                 CurrencyID = 5,
-                MerchantID = "BCD71F3D-6B23-4FE1-927B-FAA08A4B8908"
+                MerchantID = "1C4352E9-BEB6-4C7F-8BFC-9263DE60238B"
             };
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);

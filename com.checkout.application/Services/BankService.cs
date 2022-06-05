@@ -4,15 +4,15 @@ using com.checkout.application.Models;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http;
-
+using Microsoft.Extensions.Configuration;
 
 namespace com.checkout.application.services
 {
     public class BankService : IBankService
     {
-  
         public async Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction)
         {
+           
             var _httpClient = new HttpClient
             {
                 Timeout = new TimeSpan(0, 5, 0)
