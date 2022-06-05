@@ -17,12 +17,6 @@ namespace com.checkout.data.Repository
             this._context = context;
         }
 
-        //public IQueryable<CardDetails> Cards => _context.Cards;
-        //public IQueryable<Currency> Currencies => _context.Currencies;
-        //public IQueryable<Merchant> Merchants => _context.Merchants;
-        //public IQueryable<Transaction> Transactions => _context.Transactions;
-
-
         public void Add<EntityType>(EntityType entity)
         {
             _context.Add(entity);
