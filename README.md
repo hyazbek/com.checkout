@@ -124,15 +124,25 @@ dotnet ef database update
 
 The process transaction method does the below actions
 1- Check if PaymentRequest is null
+
 2- check if Amount <= 0
+
 3- check if the merchant is valid (exists in the database buy comparing MerchantID)
+
 4- Check if currency is valid (exists in the DB)
+
 5- Check if card exists in the database (by card number), if it doest not, create a new card and add it to the cards table
+
 6- create a transaction object and save it in transactions table with default status
+
 7- create unproccessed transaction object and pass it to the mock bank service
+
 8- bank service will check if user has sufficient funds (hardcoded to 1000)
+
 9- update transaction status and code
+
 10- return Ok message reponse if all the above completed without errors
+
 
 i guess i could split all these checks into seperate methods for better code readability
 
