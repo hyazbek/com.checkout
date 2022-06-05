@@ -36,7 +36,7 @@ namespace com.checkout.tests.FakeImplementations
             };
         }
 
-        public Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction)
+        public Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction, string url)
         {
             var response = new BankResponse() { BankResponseID = new Guid(), TransactionCode = TransactionCode.C_00001, TransactionStatus = TransactionStatus.Created };
             return Task.FromResult(response);

@@ -6,6 +6,6 @@ namespace com.checkout.application.Interfaces
 {
     public interface IBankService
     {
-        Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction);
+        Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction, string url);
     }
 }

@@ -21,14 +21,16 @@ namespace com.checkout.api.Controllers
         private ICurrencyService _currencyService;
         private ITransactionService _transactionService;
         private IBankService _bankService;
+        private IConfiguration _configuration;
 
-        public PaymentController(ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
+        public PaymentController(IConfiguration configuration, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
         {
             _cardService = cardService;
             _currencyService = currencyService;
             _merchantService = merchantService;
             _transactionService = transactionService;
             _bankService = bankService;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -169,7 +171,7 @@ namespace com.checkout.api.Controllers
             };
             // process bank payment, hardcoded responses from the bank and updating the transaction object with bank response
 
-            var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction).Result;
+            var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction, _configuration["appsettings:BankApi"]).Result;
             transaction.Status = newTransaction.TransactionStatus.ToString();
             transaction.StatusCode = newTransaction.TransactionCode.ToString();
 

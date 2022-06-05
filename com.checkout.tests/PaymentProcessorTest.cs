@@ -5,6 +5,7 @@ using com.checkout.application.services;
 using com.checkout.data.Model;
 using com.checkout.tests.FakeImplementations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace com.checkout.tests
 {
@@ -16,6 +17,8 @@ namespace com.checkout.tests
         private readonly ICardService _cardService;
         private readonly IBankService _bankService;
         private readonly IMerchantService _merchantService;
+        private readonly IConfiguration _configuration;
+
 
         public PaymentProcessorTest()
         {
@@ -25,7 +28,12 @@ namespace com.checkout.tests
             _cardService = new CardServiceFake();
             _bankService = new BankServiceFake();
             _merchantService = new MerchantServiceFake();
-            _controller = new PaymentController(_currencyService, _cardService, _merchantService, _transactionService, _bankService);
+            _configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(@"appsettings.json", false, false)
+                .AddEnvironmentVariables()
+                .Build();
+            _controller = new PaymentController(_configuration, _currencyService, _cardService, _merchantService, _transactionService, _bankService);
         }
 
         [Fact]

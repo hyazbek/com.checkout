@@ -51,6 +51,7 @@ namespace com.checkout.intergrationtests
             };
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);
+            
             var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
             postRequest.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             postRequest.Content = new StringContent(requestContent, Encoding.UTF8);

@@ -43,7 +43,6 @@ namespace com.checkout.api
             services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                 .ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
 
-            
             services.AddScoped<EFRepository>();
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<ICardService, CardService>();
