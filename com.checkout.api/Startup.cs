@@ -63,10 +63,13 @@ namespace com.checkout.api
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-
+            if (env.IsDevelopment() || env.IsStaging())
+            {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
+            }
+            
 
 
             app.UseHttpsRedirection();
