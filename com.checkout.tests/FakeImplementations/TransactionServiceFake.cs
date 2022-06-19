@@ -126,6 +126,7 @@ namespace com.checkout.tests.FakeImplementations
         public bool UpdateTransaction(Transaction transaction)
         {
             var temp = _transactions.Find(itm => itm.TransactionID == transaction.TransactionID);
+            if(temp == null) return false;
             try
             {
                 _transactions.Remove(temp);

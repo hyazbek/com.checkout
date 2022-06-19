@@ -40,8 +40,8 @@ namespace com.checkout.tests
         public void Get_WhenCalled_ReturnAllTransactions()
         {
             var okResult = _controller.GetAllTransactions() as OkObjectResult;
-
-            var transactions = Assert.IsType<List<Transaction>>(okResult.Value).Count;
+            
+            var transactions = Assert.IsType<List<Transaction>>(okResult?.Value).Count;
 
             Assert.Equal(3, transactions);
         }
@@ -61,7 +61,7 @@ namespace com.checkout.tests
         {
             var okResult = _controller.GetAllCards() as OkObjectResult;
 
-            var transactions = Assert.IsType<List<CardDetails>>(okResult.Value).Count;
+            var transactions = Assert.IsType<List<CardDetails>>(okResult?.Value).Count;
 
             Assert.Equal(2, transactions);
         }
@@ -71,7 +71,7 @@ namespace com.checkout.tests
         {
             var okResult = _controller.GetAllMerchants() as OkObjectResult;
 
-            var transactions = Assert.IsType<List<Merchant>>(okResult.Value).Count;
+            var transactions = Assert.IsType<List<Merchant>>(okResult?.Value).Count;
 
             Assert.Equal(1, transactions);
         }
@@ -89,7 +89,7 @@ namespace com.checkout.tests
             };
             var okResult = _controller.ProcessTransaction(paymentRequest).Result as OkObjectResult;
 
-            Assert.IsType<Transaction>(okResult.Value);
+            Assert.IsType<Transaction>(okResult?.Value);
         }
 
         [Fact]

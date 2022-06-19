@@ -19,6 +19,7 @@ namespace com.checkout.data.Repository
 
         public void Add<EntityType>(EntityType? entity)
         {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
             _context.Add(entity);
             _context.SaveChanges();
         }

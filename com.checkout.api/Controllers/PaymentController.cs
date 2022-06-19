@@ -69,11 +69,13 @@ namespace com.checkout.api.Controllers
             {
                 return BadRequest("Invalid Transaction");
             }
+
             var currency = _currencyService.GetCurrencyByID(entity.CurrencyID);
             if(currency == null)
             {
                 return BadRequest("Invalid Currency");
             }
+
             response.Currency = currency.CurrencyCode;
 
             response.Amount = entity.Amount;
@@ -81,7 +83,7 @@ namespace com.checkout.api.Controllers
             response.Status = entity.Status;
 
             var card = _cardService.GetCardDetailsByID(entity.CardDetailsID);
-            if (card == null)
+            if (card == null || card.CardNumber == null)
             {
                 return BadRequest("Invalid Card");
             }
@@ -96,9 +98,13 @@ namespace com.checkout.api.Controllers
         [Route("ProcessTransaction")]
         public async Task<IActionResult> ProcessTransaction(PaymentRequest paymentRequest)
         {
-            if(paymentRequest == null)
+            if (paymentRequest == null)
             {
                 return BadRequest("Invalid Payment Request");
+            }
+            if (paymentRequest.Card == null)
+            {
+                return BadRequest("Invalid Card");
             }
             if (paymentRequest.Amount <= 0)
             {
@@ -122,7 +128,10 @@ namespace com.checkout.api.Controllers
             {
                 return BadRequest("Invalid Currency");
             }
-
+            if (paymentRequest.Card.CardNumber == null)
+            {
+                return BadRequest("Invalid Card");
+            }
             var card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
             if (card != null)
             {
@@ -182,7 +191,7 @@ namespace com.checkout.api.Controllers
             return Ok(transaction);
         }
 
-        private static bool CardExpired(string expiryMonth, string expiryYear)
+        private static bool CardExpired(string? expiryMonth, string? expiryYear)
         {
             if (expiryMonth == null || expiryYear == null) { return false; }
             var dateValue = new DateTime();

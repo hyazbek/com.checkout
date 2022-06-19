@@ -32,7 +32,7 @@ namespace com.checkout.application.services
 
         public List<Transaction> GetTransactionsByMerchantID(Guid merchantID)
         {
-            return _contextService.GetAll<Transaction>().ToList().FindAll(itm => itm.Merchant.Id == merchantID);
+            return _contextService.GetAll<Transaction>().ToList().FindAll(itm => itm?.Merchant?.Id == merchantID);
         }
 
         public bool UpdateTransaction(Transaction transaction)
