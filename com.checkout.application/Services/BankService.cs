@@ -27,8 +27,6 @@ namespace com.checkout.application.services
             var apiResponse = await response.Result.Content.ReadAsStringAsync();
             bankResponse = JsonConvert.DeserializeObject<BankResponse>(apiResponse);
 
-
-
             return bankResponse ?? new BankResponse();
 
         }

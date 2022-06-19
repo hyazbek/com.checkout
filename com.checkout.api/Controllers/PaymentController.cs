@@ -34,14 +34,14 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllCards")]
+        [Route("/cards")]
         public ActionResult GetAllCards()
         {
             return Ok( _cardService.GetAllCards());
         }
 
         [HttpGet]
-        [Route("GetAllMerchants")]
+        [Route("/merchants")]
         public ActionResult GetAllMerchants()
         {
 
@@ -49,7 +49,7 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllTransactions")]
+        [Route("/transactions")]
         public ActionResult GetAllTransactions()
         {
             var transactions = _transactionService.GetAllTransactions();
@@ -58,7 +58,7 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpGet]
-        [Route("GetTransactionByID")]
+        [Route("/transactions/{transactionId:Guid}")]
         public ActionResult GetTransactionByID(Guid transactionId)
         {
 
@@ -95,7 +95,7 @@ namespace com.checkout.api.Controllers
         }
 
         [HttpPost]
-        [Route("ProcessTransaction")]
+        [Route("/transactions")]
         public async Task<IActionResult> ProcessTransaction(PaymentRequest paymentRequest)
         {
             if (paymentRequest == null)
