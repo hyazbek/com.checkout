@@ -12,25 +12,25 @@ namespace com.checkout.application.services
     {
         public async Task<BankResponse> ProcessTranaction(UnprocessedTransaction transaction, string url)
         {
-           
+
             var _httpClient = new HttpClient
             {
                 Timeout = new TimeSpan(0, 5, 0)
             };
             var bankResponse = new BankResponse();
-            using (var client = _httpClient)
-            {
-                var content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
+            using var client = _httpClient;
 
-                using (var response = client.PostAsync(url, content))
-                {
-                    var apiResponse = await response.Result.Content.ReadAsStringAsync();
-                    bankResponse = JsonConvert.DeserializeObject<BankResponse>(apiResponse);
-                }
-            }
+            var content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
 
-            return bankResponse != null? bankResponse : new BankResponse();
-            
+            using var response = client.PostAsync(url, content);
+
+            var apiResponse = await response.Result.Content.ReadAsStringAsync();
+            bankResponse = JsonConvert.DeserializeObject<BankResponse>(apiResponse);
+
+
+
+            return bankResponse ?? new BankResponse();
+
         }
         
     }

@@ -182,21 +182,21 @@ namespace com.checkout.api.Controllers
             };
             // process bank payment, hardcoded responses from the bank and updating the transaction object with bank response
 
-            var newTransaction = _bankService.ProcessTranaction(unprocessedTransaction, _configuration["appsettings:BankApi"]).Result;
+            var newTransaction =  _bankService.ProcessTranaction(unprocessedTransaction, _configuration["appsettings:BankApi"]).Result;
             transaction.Status = newTransaction.TransactionStatus.ToString();
             transaction.StatusCode = newTransaction.TransactionCode.ToString();
 
             _transactionService.UpdateTransaction(transaction);
 
-            return Ok(transaction);
+            return await Task.FromResult(Ok(transaction));
         }
 
         private static bool CardExpired(string? expiryMonth, string? expiryYear)
         {
             if (expiryMonth == null || expiryYear == null) { return false; }
-            var dateValue = new DateTime();
+            
 
-            if (DateTime.TryParse("01/" + expiryMonth + '/' + expiryYear, out dateValue))
+            if (DateTime.TryParse("01/" + expiryMonth + '/' + expiryYear, out DateTime dateValue))
                 if (dateValue < DateTime.Now)
                     return false;
                 else
