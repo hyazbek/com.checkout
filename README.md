@@ -12,7 +12,7 @@ Api was deployed to MS Azure, you can check the working versions on the below li
 ## Deliverables
 
 ### com.checkout.api
-API that processes a payment through the gateway and ability to check for a payment details of a previously made payment through its transaction id.
+API that processes a payment through the gateway and ability to check for a payment detail of a previously made payment through its transaction id.
 ### com.checkout.bank
 Bank API that will be called from the payment processing api and returns the status of a payment.
 
@@ -134,11 +134,11 @@ The process transaction method does the below actions
 
 2- check if Amount <= 0
 
-3- check if the merchant is valid (exists in the database buy comparing MerchantID)
+3- check if the merchant is valid (exists in the database by comparing MerchantID)
 
 4- Check if currency is valid (exists in the DB)
 
-5- Check if card exists in the database (by card number), if it doest not, create a new card and add it to the cards table
+5- Check if card exists in the database (by card number), if it does not, create a new card and add it to the cards table
 
 6- create a transaction object and save it in transactions table with default status
 
@@ -148,10 +148,10 @@ The process transaction method does the below actions
 
 9- update transaction status and code
 
-10- return Ok message reponse if all the above completed without errors
+10- return Ok message response if all the above completed without errors
 
 
-i guess i could split all these checks into seperate methods for better code readability
+i guess i could split all these checks into separate methods for better code readability
 
 
 ## The Extra Mile 
@@ -160,7 +160,7 @@ i guess i could split all these checks into seperate methods for better code rea
 
 
 ### Enable App Insights
-- Application Insigts are enabled on Azure App Service
+- Application Insights are enabled on Azure App Service
 ![Azure App Insights](https://dub01pap003files.storage.live.com/y4mi1DPfdyW89ZrpBb4WJEfxFDwqXaiZla9r5RmA8jKdC4JUOaNUggM9ZgAGqsStHlf-YlTBCYDhXbDxAhbJh4J_bVT9PpCqmzj45_Be6wnani6PSSzfKeV8Q9EuCjJe-ztDaXcfocOukeqrTAxiw8r82RXrMLfXOrv0RUCBaMABlCml8tUkdpmSgICxyMBu0a2H3SY7P33TaB_d3Yy2c1E3raEgqFx4KEU-GAZzk5toSs?encodeFailures=1&width=1101&height=613)
 
 
@@ -178,3 +178,4 @@ i guess i could split all these checks into seperate methods for better code rea
 [API Unit Tests](https://code-maze.com/unit-testing-aspnetcore-web-api/)
 
 [API Integration Tests](https://code-maze.com/aspnet-core-integration-testing/)
+
