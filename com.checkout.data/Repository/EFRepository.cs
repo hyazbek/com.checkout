@@ -10,11 +10,11 @@ namespace com.checkout.data.Repository
 {
     public class EFRepository
     {
-        public readonly CKODBContext _context;
+        private readonly CKODBContext _context;
 
         public EFRepository(CKODBContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void Add<EntityType>(EntityType entity)
@@ -37,15 +37,6 @@ namespace com.checkout.data.Repository
             _context.SaveChanges();
             return true;
         }
-        // add generic update method here
-
-        //public bool UpdateTransaction(Transaction transaction)
-        //{
-        //    _context.Update<Transaction>(transaction);//.Update(transaction);
-        //    int status = _context.SaveChanges();
-
-        //    return status == 1 ? true : false;
-        //}
 
     }
 }

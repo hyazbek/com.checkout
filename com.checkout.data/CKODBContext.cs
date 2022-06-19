@@ -25,7 +25,7 @@ namespace com.checkout.data
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
 
-            string conn = "Server=localhost\\SQLEXPRESS;Database=CKODB;Trusted_Connection = True; MultipleActiveResultSets = true";
+            var conn = "Server=localhost\\SQLEXPRESS;Database=CKODB;Trusted_Connection = True; MultipleActiveResultSets = true";
             if (!options.IsConfigured)
             {
                 options.UseSqlServer(conn);

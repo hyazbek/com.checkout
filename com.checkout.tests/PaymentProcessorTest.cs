@@ -49,7 +49,7 @@ namespace com.checkout.tests
         [Fact]
         public void Get_WhenCalled_ReturnTransactionWithPassedGUID()
         {
-            Guid test = new Guid("3c4a9475-7c59-4bfd-8a0c-3dcdd9bfdab9");
+            var test = new Guid("3c4a9475-7c59-4bfd-8a0c-3dcdd9bfdab9");
 
             var okResult = _controller.GetTransactionByID(test);
 
@@ -80,7 +80,7 @@ namespace com.checkout.tests
         public void Post_WhenCalled_StartPaymentProcess()
         {
 
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
                 Card = new CardDetails() { CardDetailsID = 3, CardNumber = "4953089013607", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2033", HolderName = "Unit Testing" },
@@ -96,7 +96,7 @@ namespace com.checkout.tests
         public void Post_WhenCalled_InvalidMerchantReturnsBadRequest()
         {
 
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -111,7 +111,7 @@ namespace com.checkout.tests
         public void Post_WhenCalled_InvalidCurrencyReturnsBadRequest()
         {
 
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -127,7 +127,7 @@ namespace com.checkout.tests
         public void Post_WhenCalled_InvalidAmountReturnsBadRequest()
         {
 
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = -999,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -142,7 +142,7 @@ namespace com.checkout.tests
         public void Post_WhenCalled_ExpiredCardReturnsBadRequest()
         {
 
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 999,
                 Card = new CardDetails() { CardDetailsID = 10, CardNumber = "777777777", Cvv = "1111", ExpiryMonth = "11", ExpiryYear = "2020", HolderName = "Unit Testing" },

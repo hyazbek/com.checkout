@@ -40,9 +40,7 @@ namespace com.checkout.intergrationtests
         [Fact]
         public async Task Post_SendForm_InsertDetailsInDatabase()
         {
-
-            //var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 444,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -67,9 +65,7 @@ namespace com.checkout.intergrationtests
         [Fact]
         public async Task Post_SendForm_WrongCurrencyReturnBadRequest()
         {
-
-            //var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 444,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -84,7 +80,7 @@ namespace com.checkout.intergrationtests
             postRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.SendAsync(postRequest);
-            //response.EnsureSuccessStatusCode();
+            
             var responseString = await response.Content.ReadAsStringAsync();
 
             Assert.Contains("Invalid Currency", responseString);
@@ -92,9 +88,7 @@ namespace com.checkout.intergrationtests
         [Fact]
         public async Task Post_SendForm_WrongMerchantReturnBadRequest()
         {
-
-            //var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
-            PaymentRequest paymentRequest = new PaymentRequest()
+            var paymentRequest = new PaymentRequest()
             {
                 Amount = 444,
                 Card = new CardDetails() { CardDetailsID = 11, CardNumber = "5555555555", Cvv = "555", ExpiryMonth = "11", ExpiryYear = "2055", HolderName = "Unit Testing" },
@@ -109,7 +103,7 @@ namespace com.checkout.intergrationtests
             postRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.SendAsync(postRequest);
-            //response.EnsureSuccessStatusCode();
+            
             var responseString = await response.Content.ReadAsStringAsync();
 
             Assert.Contains("Invalid Merchant", responseString);

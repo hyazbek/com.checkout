@@ -184,7 +184,7 @@ namespace com.checkout.api.Controllers
         private bool CardExpired(string expiryMonth, string expiryYear)
         {
             if (expiryMonth == null || expiryYear == null) { return false; }
-            DateTime dateValue;
+            var dateValue = new DateTime();
 
             if (DateTime.TryParse("01/" + expiryMonth + '/' + expiryYear, out dateValue))
                 if (dateValue < DateTime.Now)

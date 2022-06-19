@@ -61,7 +61,7 @@ namespace com.checkout.tests.FakeImplementations
 
         public bool ValidateCard(CardDetails card)
         {
-            CreditCardDetector detector = new CreditCardDetector(card.CardNumber);
+            var detector = new CreditCardDetector(card.CardNumber);
             return detector.IsValid();
         }
     }

@@ -4,7 +4,7 @@
     {
         internal static string MaskCarNumber(string cardNumber)
         {
-            int length = cardNumber.Length;
+            var length = cardNumber.Length;
 
             var first = cardNumber.Substring(0,1);
             var last = cardNumber.Substring(length - 1);

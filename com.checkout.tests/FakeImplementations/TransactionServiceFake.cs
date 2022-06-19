@@ -111,7 +111,6 @@ namespace com.checkout.tests.FakeImplementations
         {
             entity.TransactionID = new Guid();
             _transactions.Add(entity);
-            //return entity;
         }
 
         public List<Transaction> GetAllTransactions()

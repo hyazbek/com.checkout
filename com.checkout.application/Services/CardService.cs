@@ -38,7 +38,7 @@ namespace com.checkout.application.services
 
         public bool ValidateCard(CardDetails card)
         {
-            CreditCardDetector detector = new CreditCardDetector(card.CardNumber);
+            var detector = new CreditCardDetector(card.CardNumber);
             return detector.IsValid();
         }
     }

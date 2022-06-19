@@ -20,11 +20,11 @@ namespace com.checkout.application.services
             var bankResponse = new BankResponse();
             using (var client = _httpClient)
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(transaction), Encoding.UTF8, "application/json");
 
                 using (var response = client.PostAsync(url, content))
                 {
-                    string apiResponse = await response.Result.Content.ReadAsStringAsync();
+                    var apiResponse = await response.Result.Content.ReadAsStringAsync();
                     bankResponse = JsonConvert.DeserializeObject<BankResponse>(apiResponse);
                 }
             }
