@@ -19,15 +19,15 @@ namespace com.checkout.api
     {
         #region Properties
 
-        private IConfiguration _configuration { get; }
+        private IConfiguration Configuration { get; }
 
         #endregion
 
         #region Constuctor
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration config)
         {
-            _configuration = configuration;
+            Configuration = config;
         }
 
         #endregion
@@ -51,7 +51,7 @@ namespace com.checkout.api
             services.AddScoped<IBankService, BankService>();
 
             services.AddDbContext<CKODBContext>(options =>
-             options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
         }
@@ -60,8 +60,7 @@ namespace com.checkout.api
         /// Called by the runtime to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app)
         {
 
                 app.UseDeveloperExceptionPage();

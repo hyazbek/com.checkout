@@ -7,7 +7,7 @@ namespace com.checkout.application.Interfaces
     public interface ITransactionService
     {
         void CreateTransaction(Transaction entity);
-        Transaction GetTransactionById(Guid transactionID);
+        Transaction? GetTransactionById(Guid transactionID);
         List<Transaction> GetAllTransactions();
         bool UpdateTransaction(Transaction transaction);
     }

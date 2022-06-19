@@ -17,7 +17,7 @@ namespace com.checkout.data.Repository
             _context = context;
         }
 
-        public void Add<EntityType>(EntityType entity)
+        public void Add<EntityType>(EntityType? entity)
         {
             _context.Add(entity);
             _context.SaveChanges();

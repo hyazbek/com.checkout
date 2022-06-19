@@ -25,7 +25,7 @@ namespace com.checkout.application.services
         {
             return _contextService.GetAll<Transaction>().ToList();
         }
-        public Transaction GetTransactionById(Guid transactionID)
+        public Transaction? GetTransactionById(Guid transactionID)
         {
             return _contextService.Find<Transaction>(t => t.TransactionID == transactionID).FirstOrDefault();
         }

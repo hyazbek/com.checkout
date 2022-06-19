@@ -5,8 +5,8 @@ namespace com.checkout.application.Interfaces
     public interface ICardService
     {
         List<CardDetails> GetAllCards();
-        CardDetails GetCardDetailsByNumber(string cardNumber);
-        CardDetails GetCardDetailsByID(int cardID);
+        CardDetails? GetCardDetailsByNumber(string cardNumber);
+        CardDetails? GetCardDetailsByID(int cardID);
         void AddCard(CardDetails card);
         bool ValidateCard(CardDetails card);
     }

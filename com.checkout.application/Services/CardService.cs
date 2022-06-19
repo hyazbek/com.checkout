@@ -26,12 +26,12 @@ namespace com.checkout.application.services
             return _contextService.GetAll<CardDetails>().ToList();
         }
 
-        public CardDetails GetCardDetailsByID(int cardID)
+        public CardDetails? GetCardDetailsByID(int cardID)
         {
             return _contextService.GetAll<CardDetails>().ToList().Find(itm => itm.CardDetailsID == cardID);
         }
 
-        public CardDetails GetCardDetailsByNumber(string cardNumber)
+        public CardDetails? GetCardDetailsByNumber(string cardNumber)
         {
             return _contextService.GetAll<CardDetails>().ToList().Find(itm => itm.CardNumber == cardNumber);
         }

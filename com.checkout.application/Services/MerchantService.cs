@@ -15,7 +15,7 @@ namespace com.checkout.application.services
             _contextService = contextService;
         }
 
-        public Merchant GetMerchant(Guid merchantID)
+        public Merchant? GetMerchant(Guid merchantID)
         {
             return _contextService.GetAll<Merchant>().ToList().Find(itm => itm.Id == merchantID);
         }

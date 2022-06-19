@@ -118,7 +118,7 @@ namespace com.checkout.tests.FakeImplementations
             return _transactions;
         }
 
-        public Transaction GetTransactionById(Guid transactionID)
+        public Transaction? GetTransactionById(Guid transactionID)
         {
             return _transactions.Find(itm => itm.TransactionID == transactionID);
         }
@@ -134,6 +134,7 @@ namespace com.checkout.tests.FakeImplementations
             }
             catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }

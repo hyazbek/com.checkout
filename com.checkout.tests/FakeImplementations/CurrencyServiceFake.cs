@@ -38,7 +38,7 @@ namespace com.checkout.tests.FakeImplementations
             };
         }
        
-        public Currency GetCurrencyByID(int currency)
+        public Currency? GetCurrencyByID(int currency)
         {
             return _currencies.Find(itm => itm.Id == currency);
         }

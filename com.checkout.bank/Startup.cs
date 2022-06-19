@@ -36,8 +36,7 @@ namespace com.checkout.api
         /// Called by the runtime to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app)
         {
 
             app.UseDeveloperExceptionPage();

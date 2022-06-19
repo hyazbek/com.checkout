@@ -49,12 +49,12 @@ namespace com.checkout.tests.FakeImplementations
             return _cards;
         }
 
-        public CardDetails GetCardDetailsByID(int cardID)
+        public CardDetails? GetCardDetailsByID(int cardID)
         {
             return _cards.Find(itm => itm.CardDetailsID == cardID);
         }
 
-        public CardDetails GetCardDetailsByNumber(string cardNumber)
+        public CardDetails? GetCardDetailsByNumber(string cardNumber)
         {
             return _cards.Find(itm => itm.CardNumber == cardNumber);
         }

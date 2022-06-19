@@ -40,6 +40,7 @@ namespace com.checkout.intergrationtests
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine(ex.Message);
                         throw;
                     }
                 }

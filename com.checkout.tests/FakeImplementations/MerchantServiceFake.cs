@@ -26,7 +26,7 @@ namespace com.checkout.tests.FakeImplementations
             };
         }
 
-        public Merchant GetMerchant(Guid merchantID)
+        public Merchant? GetMerchant(Guid merchantID)
         {
             return _merchants.Find(itm => itm.Id == merchantID);
         }

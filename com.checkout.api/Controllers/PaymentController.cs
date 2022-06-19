@@ -16,12 +16,12 @@ namespace com.checkout.api.Controllers
     public class PaymentController : ControllerBase
     {
        
-        private ICardService _cardService;
-        private IMerchantService _merchantService;
-        private ICurrencyService _currencyService;
-        private ITransactionService _transactionService;
-        private IBankService _bankService;
-        private IConfiguration _configuration;
+        private readonly ICardService _cardService;
+        private readonly IMerchantService _merchantService;
+        private readonly ICurrencyService _currencyService;
+        private readonly ITransactionService _transactionService;
+        private readonly IBankService _bankService;
+        private readonly IConfiguration _configuration;
 
         public PaymentController(IConfiguration configuration, ICurrencyService currencyService, ICardService cardService, IMerchantService merchantService, ITransactionService transactionService, IBankService bankService)
         {
@@ -70,6 +70,10 @@ namespace com.checkout.api.Controllers
                 return BadRequest("Invalid Transaction");
             }
             var currency = _currencyService.GetCurrencyByID(entity.CurrencyID);
+            if(currency == null)
+            {
+                return BadRequest("Invalid Currency");
+            }
             response.Currency = currency.CurrencyCode;
 
             response.Amount = entity.Amount;
@@ -107,22 +111,19 @@ namespace com.checkout.api.Controllers
                 return BadRequest("Invalid Merchant ID");
             }
 
-            var merchant = new Merchant();
-            merchant = _merchantService.GetMerchant(merchantID);
+            var merchant = _merchantService.GetMerchant(merchantID);
             if (merchant == null)
             {
                 return BadRequest("Invalid Merchant");
             }
 
-            var currency = new Currency();
-            currency = _currencyService.GetCurrencyByID(paymentRequest.CurrencyID);
+            var currency = _currencyService.GetCurrencyByID(paymentRequest.CurrencyID);
             if(currency == null)
             {
                 return BadRequest("Invalid Currency");
             }
 
-            var card = new CardDetails();
-            card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
+            var card = _cardService.GetCardDetailsByNumber(paymentRequest.Card.CardNumber);
             if (card != null)
             {
                 if (!CardExpired(card.ExpiryMonth, card.ExpiryYear)){
@@ -181,7 +182,7 @@ namespace com.checkout.api.Controllers
             return Ok(transaction);
         }
 
-        private bool CardExpired(string expiryMonth, string expiryYear)
+        private static bool CardExpired(string expiryMonth, string expiryYear)
         {
             if (expiryMonth == null || expiryYear == null) { return false; }
             var dateValue = new DateTime();
