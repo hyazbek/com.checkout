@@ -118,6 +118,12 @@ dotnet ef database update
 
 - Make sure set startup projects in the solution to com.checkout.api and com.checkout.bank 
 
+## Integration Tests
+
+To run the integration tests, you need to restore the database to sql server, and make sure that the machine running the tests has internet access,
+and can access the below url
+https://comcheckoutbank.azurewebsites.net/BankTransaction/ProcessTransaction
+
 ![Multiple Startup Projects](https://dub01pap003files.storage.live.com/y4mSiCjcfmkSBGNlRx4nZXXJyovEPm554w7aIqxdRx4ZsNp-5dTHGj1elOYMHep414-vh4Ny53BZAYS2jSqpQTajsS0HOU15SLQFB-n9F2Ag5G6kQRysE6x0rSCZativVKNohqieJjfjWZPsibXqYLKnLcXNKX6CeCRuTudnH4UU8cFfpiErs6qz_wsY0WGHES67qK75tvezYbo2uzWzTSC1IN3Vr6cyvLhayg2OvTwGLU?encodeFailures=1&width=783&height=539)
 
 ## Process Transaction Code
