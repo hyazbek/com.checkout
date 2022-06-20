@@ -42,7 +42,7 @@ namespace com.checkout.data.Migrations
             migrationBuilder.InsertData(
                 table: "Transactions",
                 columns: new[] { "TransactionID", "Amount", "CardDetailsID", "CurrencyID", "MerchantID", "Status", "StatusCode" },
-                values: new object[] { new Guid("ed9a5b76-b5cc-46f6-9372-7657a2812158"), 322m, 1, 1, new Guid("1c4352e9-beb6-4c7f-8bfc-9263de60238b"), "Created", "C_00001" });
+                values: new object[] { new Guid("ed9a5b76-b5cc-46f6-9372-7657a2812158"), 322, 1, 1, new Guid("1c4352e9-beb6-4c7f-8bfc-9263de60238b"), "Created", "C_00001" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
