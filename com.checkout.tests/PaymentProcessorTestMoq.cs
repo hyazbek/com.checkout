@@ -13,12 +13,14 @@ namespace com.checkout.tests
     public class PaymentProcessorTestMoq
     {
         private readonly PaymentController _controller;
+        private readonly IConfiguration _configuration;
+
         private readonly Mock<ITransactionService> _transactionServiceMock;
         private readonly Mock<ICurrencyService> _currencyServiceMock;
         private readonly Mock<ICardService> _cardServiceMock;
         private readonly Mock<IBankService> _bankServiceMock;
         private readonly Mock<IMerchantService> _merchantServiceMock;
-        private readonly IConfiguration _configuration;
+        
 
         public PaymentProcessorTestMoq()
         {
@@ -28,7 +30,6 @@ namespace com.checkout.tests
             _cardServiceMock = new Mock<ICardService>();
             _bankServiceMock = new Mock<IBankService>();
             _merchantServiceMock = new Mock<IMerchantService>();
-
             
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -36,7 +37,6 @@ namespace com.checkout.tests
                 .AddEnvironmentVariables()
                 .Build();
 
-            
             _controller = new PaymentController(_configuration, _currencyServiceMock.Object, _cardServiceMock.Object, _merchantServiceMock.Object, _transactionServiceMock.Object, _bankServiceMock.Object);
         }
 
