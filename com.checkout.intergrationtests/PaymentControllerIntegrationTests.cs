@@ -11,7 +11,7 @@ namespace com.checkout.intergrationtests
     public class PaymentControllerIntegrationTests : IClassFixture<TestingWebAppFactory<Startup>>
     {
 
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public PaymentControllerIntegrationTests()
         {
@@ -21,7 +21,7 @@ namespace com.checkout.intergrationtests
         [Fact]
         public async Task Get_WhenCalled_ReturnsAllCards()
         {
-            var response = await _httpClient.GetAsync("/Payment/GetAllCards");
+            var response = await _httpClient.GetAsync("/cards");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Contains("123456789", responseString);
@@ -30,7 +30,7 @@ namespace com.checkout.intergrationtests
         [Fact]
         public async Task Get_WhenCalled_ReturnsTransactionByID()
         {
-            var response = await _httpClient.GetAsync("/Payment/GetTransactionByID?transactionId=ED9A5B76-B5CC-46F6-9372-7657A2812158");
+            var response = await _httpClient.GetAsync("/transactions/ED9A5B76-B5CC-46F6-9372-7657A2812158");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();
             Assert.Contains("322", responseString);
@@ -50,7 +50,7 @@ namespace com.checkout.intergrationtests
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);
             
-            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/transactions");
             postRequest.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             postRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             postRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -74,7 +74,7 @@ namespace com.checkout.intergrationtests
             };
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);
-            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/transactions");
             postRequest.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             postRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             postRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -97,7 +97,7 @@ namespace com.checkout.intergrationtests
             };
 
             var requestContent = JsonSerializer.Serialize(paymentRequest);
-            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Payment/ProcessTransaction");
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "/transactions");
             postRequest.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             postRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             postRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
